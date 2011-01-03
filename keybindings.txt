@@ -1,0 +1,41 @@
+Session:
+<Super>l : lock screen
+<Super>End : power down options
+
+Applications:
+<Super>h : open home directory
+<Super>t : launch terminal
+<Super>b : open media player
+
+Terminal:
+<Ctrl>= : enlarge text
+<Ctrl>- : shrink text
+<Ctrl>0 : normal text
+<Shift>Left : switch to tab to the left
+<Shift>Right : switch to tab to the right
+<Ctrl><Shift>Left : move tab left
+<Ctrl><Shift>Right : move tab right
+<Ctrl><Shift>v : paste
+
+Gedit:
+<Ctrl>= : enlarge text
+<Ctrl>- : shrink text
+<Ctrl>0 : normal text
+
+Zoom:
+<Ctrl>wheel up : zoom in
+<Ctrl>wheel down : zoom out
+
+Switcher:
+<Super>a : show all windows
+<Ctrl><Alt>Down : expose (can drag windows between desktop here)
+Menu : show windows on current desktop
+<Super>Menu : show all windows
+<Ctrl><Alt>Left : switch to desktop to the left
+<Ctrl><Alt>Right : switch to desktop to the right
+<Alt>Tab : next window (same desktop) (can't use sticky keys)
+<Ctrl><Alt>Tab : next window (any desktop) (can't use sticky keys)
+<Super>Tab : switch windows in a ring
+
+Touchpad:
+<Super><Alt>t : Toggle touchpad (was <Ctrl><Alt>0)
