@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# Convert PS to PDF
+#
+# This script will convert the selected postscript files to PDF
+# format using the ps2pdf program.
+#
+# Author: Dan Allen http://www.mojavelinux.com
+# Version: 1.0
+# Dependencies: ps2pdf, zenity (or xmessage)
+# License: GPL
+# Last Modified: 2007.02.24
+
+error_msg() {
+    if [ `which zenity` ]; then
+        zenity --error --text "$1"
+    elif [ `which xmessage` ]; then
+        xmessage -buttons OK "$1"
+    fi
+
+    exit 1
+}
+
+info_msg() {
+    if [ `which zenity` ]; then
+        zenity --info --text "$1"
+    elif [ `which xmessage` ]; then
+        xmessage -buttons OK "$1"
+    fi
+}
+
+if [ ! `which ps2pdf` ]; then
+    error_msg "You must have ps2pdf installed to run this script."
+fi
+
+if [ -z $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS ]; then
+    error_msg "At least one postscript file must be selected."
+fi
+
+IFS="
+"
+
+nconverted=0
+for file in $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS; do
+    if [ -f "$file" ]; then
+        basename=${file%.*}
+        ext=${file##*.}
+        if [ $ext = "ps" ]; then
+			tmpoutfile=${basename}.pdf.part
+            outfile=${basename}.pdf
+            ps2pdf -sPAPERSIZE=letter -dPDFSETTINGS=/printer -dOptimize=true -dCompatibilityLevel=1.4 -dUseFlateCompression=true "$file" "$tmpoutfile"
+			mv "$tmpoutfile" "$outfile"
+		    nconverted=$((nconverted+1))
+        elif [ $ext = "png" ]; then
+            outfile=${basename}.pdf
+            convert "$file" "$outfile"
+		    nconverted=$((nconverted+1))
+        fi
+    fi
+done
+
+if [ $nconverted -gt 0 ]; then
+    info_msg "Successfully converted $nconverted document(s)."
+else
+    error_msg "None of the selected files are valid postscript documents."
+fi
+
+exit 0

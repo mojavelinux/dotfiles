@@ -1,0 +1,25 @@
+# ~/.inputrc: readline customizations (man readline)
+
+# Tilde expansion is done when processing completions
+#set expand-tilde on
+
+# Show completions after first press of TAB key
+set show-all-if-ambiguous on
+
+# Results in a character being appended to any file-names returned by completion
+#set visible-stats on
+
+# Don't show hidden files when doing completions
+#set match-hidden-files off 
+
+# Set editing mode to either emacs or vi
+#set editing mode emacs
+
+# Ignore case when doing completions
+#set completion-ignore-case on
+
+# Scroll long command lines
+#set horizontal-scroll-mode off
+
+# Do not beep on tab-completion
+set bell-style none

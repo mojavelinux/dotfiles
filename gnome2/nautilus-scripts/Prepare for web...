@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+# Prepare images for web
+#
+# This script will convert the selected images to a lower resolution
+# so they can be reasonably viewed on the web.
+#
+# Author: Dan Allen http://www.mojavelinux.com
+# Version: 1.0
+# Dependencies: convert, zenity (or xmessage)
+# License: GPL
+# Last Modified: 2008.12.19
+
+error_msg() {
+    if [ `which zenity` ]; then
+        zenity --error --text "$1"
+    elif [ `which xmessage` ]; then
+        xmessage -buttons OK "$1"
+    fi
+
+    exit 1
+}
+
+info_msg() {
+    if [ `which zenity` ]; then
+        zenity --info --text "$1"
+    elif [ `which xmessage` ]; then
+        xmessage -buttons OK "$1"
+    fi
+}
+
+if [ ! `which convert` ]; then
+    error_msg "You must have convert installed to run this script."
+fi
+
+if [ -z $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS ]; then
+    error_msg "At least one postscript file must be selected."
+fi
+
+IFS="
+"
+
+mkdir -p netready
+
+nconverted=0
+for file in $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS; do
+    if [ -f "$file" ]; then
+        folder=${file%/*}
+        basename=${file##*/}
+        ext=${file##*.}
+        outfile=${basename/.jpg/-medium.jpg}
+        if [ $ext = "jpg" ]; then
+            # 604x453 (what Facebook uses)
+            convert -resize "273612@" "$file" "$folder/netready/$outfile"
+            nconverted=$((nconverted+1))
+        fi
+    fi
+done
+
+if [ $nconverted -gt 0 ]; then
+    info_msg "Successfully resized $nconverted image(s)."
+else
+    error_msg "None of the selected files are images."
+fi
+
+exit 0

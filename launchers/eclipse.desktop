@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=0
+Categories=Development;Java;IDE
+Name[en_US]=Eclipse
+Exec=/home/dallen/opt/eclipse/eclipse
+Comment[en_US]=Develop Java programs
+Icon[en_US]=/home/dallen/config/launchers/eclipse.svg
+Name=Eclipse
+Comment=Develop Java programs
+Icon=/home/dallen/config/launchers/eclipse.svg

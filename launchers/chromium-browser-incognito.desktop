@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Network;WebBrowser;
+Comment=Surf the web privately
+Comment[en_US]=Browse the web privately
+Encoding=UTF-8
+Exec=chromium-browser --incognito %U
+Icon=gnome-panel-launcher
+Icon[en_US]=/home/dallen/config/launchers/chromium-browser-incognito.png
+Name=Chromium Incognito
+Name[en_US]=Chromium Incognito Web Browser
+NoDisplay=false
+Terminal=false
+Type=Application
+Version=1.0
