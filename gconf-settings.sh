@@ -28,7 +28,17 @@ gconftool-2 --type int --set /apps/compiz/plugins/move/allscreens/options/opacit
 gconftool-2 --type bool --set /apps/compiz/plugins/wall/allscreens/options/miniscreen 1
 gconftool-2 --type bool --set /apps/compiz/plugins/wall/allscreens/options/allow_wraparound 1
 gconftool-2 --type int --set /apps/compiz/plugins/wall/allscreens/options/preview_scale 200
-gconftool-2 --type string --set /apps/compiz/plugins/expo/allscreens/options/expo_key "<Ctrl><Alt>Down"
+gconftool-2 --type string --set /apps/compiz/plugins/expo/allscreens/options/expo_key "<Control><Alt>Down"
+gconftool-2 --type string --set /apps/compiz/plugins/switcher/allscreens/options/next_key "<Alt><Control>Tab"
+#gconftool-2 --type string --set /apps/compiz/plugins/switcher/allscreens/options/next_all_key "<Alt>Tab"
+gconftool-2 --type string --set /apps/compiz/plugins/switcher/allscreens/options/prev_key "<Alt><Shift><Control>Tab"
+#gconftool-2 --type string --set /apps/compiz/plugins/switcher/allscreens/options/prev_all_key "<Alt><Shift>Tab"
+gconftool-2 --type string --set /apps/compiz/plugins/staticswitcher/allscreens/options/next_all_key "<Alt>Tab"
+gconftool-2 --type string --set /apps/compiz/plugins/staticswitcher/allscreens/options/prev_all_key "<Alt><Shift>Tab"
+gconftool-2 --type string --set /apps/compiz/plugins/ring/allscreens/options/next_key "<Super><Control>Tab"
+gconftool-2 --type string --set /apps/compiz/plugins/ring/allscreens/options/next_all_key "<Super>Tab"
+gconftool-2 --type string --set /apps/compiz/plugins/ring/allscreens/options/prev_key "<Super><Shift><Control>Tab"
+gconftool-2 --type string --set /apps/compiz/plugins/ring/allscreens/options/prev_all_key "<Super><Shift>Tab"
 
 # Metacity settings
 gconftool-2 --type int --set /apps/metacity/general/num_workspaces 6 # keep enabled just in case not using compiz
@@ -82,6 +92,7 @@ gconftool-2 --type bool --set /apps/nautilus/preferences/media_automount_open 0
 gconftool-2 --type string --set /apps/nautilus/preferences/preview_sound "always"
 gconftool-2 --type string --set /apps/nautilus/preferences/show_directory_item_counts "always"
 gconftool-2 --type string --set /apps/nautilus/preferences/show_image_thumbnails "always"
+gconftool-2 --type bool --set /apps/nautilus/preferences/show_advanced_permissions 1
 
 # Terminal
 gconftool-2 --type bool --set /apps/gnome-terminal/profiles/Default/default_show_menubar 0

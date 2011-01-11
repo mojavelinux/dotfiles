@@ -27,10 +27,10 @@ pathmunge $MAVEN_HOME/bin
 pathmunge $ECLIPSE_HOME
 pathmunge $ANDROID_HOME/tools
 pathmunge $GRADLE_HOME/bin
+pathmunge $GLASSFISH_HOME/bin
 #pathmunge $GEM_HOME/bin
 #pathmunge $JEDIT_HOME
 #pathmunge $MOZILLA_FIVE_HOME
-#pathmunge $HOME/opt/thunderbird
 if [ -d ~/bin ] ; then
     pathmunge ~/bin
 fi

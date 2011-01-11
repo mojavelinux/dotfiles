@@ -10,6 +10,8 @@ export MAVEN_HOME=$HOME/opt/maven
 export ECLIPSE_HOME=$HOME/opt/eclipse
 export ANDROID_HOME=$HOME/opt/android-sdk-1.5
 export GRADLE_HOME=$HOME/opt/gradle
+export JBOSSAS_HOME=$HOME/opt/jboss-as
+# legacy JBoss AS home
 export JBOSS_HOME=$HOME/opt/jboss-as
 #export JEDIT_HOME=$HOME/opt/jedit
 #export GEM_HOME=/var/lib/gems/1.8
