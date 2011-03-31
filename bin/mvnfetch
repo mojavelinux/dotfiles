@@ -1,0 +1,116 @@
+#!/usr/bin/env groovy
+
+// Similar capability provided by mvnhack: http://code.google.com/p/werkzeugkasten/wiki/mvnhack
+// Similar capability provided by (dependency:get): http://maven.apache.org/plugins/maven-dependency-plugin/get-mojo.html
+
+def artifactId = null
+def groupId = null
+def version = null
+def classifier = ''
+def type = 'jar'
+
+if (System.in.available()) {
+	def dependency = new XmlSlurper().parseText(System.in.text.trim())
+	groupId = dependency.groupId
+	artifactId = dependency.artifactId
+	version = dependency.version
+}
+
+// Setup the command line options
+def cli = new CliBuilder(usage: 'mvnfetch [OPTION]')
+cli.h(longOpt:'help', 'display this help and exit')
+cli.g(longOpt:'groupId', args:1, 'The groupId of the artifact to fetch')
+cli.a(longOpt:'artifactId', args:1, 'The artifactId of the artifact to fetch')
+cli.v(longOpt:'version', args:1, 'The version of the artifact to fetch')
+cli.c(longOpt:'classifier', args:1, 'The classifier of the artifact to fetch')
+cli.t(longOpt:'type', args:1, 'The type (pom, jar, etc) of the artifact to fetch')
+cli.o(longOpt:'output', args:0, 'Output the absolute file name after fetching')
+cli.r(longOpt:'repository', args:1, 'Alternate repository')
+cli.x(longOpt:'debug', args:0, 'Don\'t delete temporary POM file')
+
+// Parse the command line options
+def options = cli.parse(args)
+
+if (options.h) {
+	println 'Sets up a temporary project to download an artifact into the local repository'
+	cli.usage()
+	return
+}
+
+if (options.arguments().size() == 1) {
+   def segments = options.arguments()[0].split(':')
+   if (segments.length < 3 || segments.length > 5) {
+      println 'Invalid full-qualified artifact syntax'
+      return
+   }
+
+   groupId = segments[0]
+   artifactId = segments[1]
+   version = segments[2]
+   if (segments.length == 4) 
+      classifier = segments[3]
+   if (segments.length == 5)
+      type = segments[4]
+}
+else {
+   if (options.g)
+   	groupId = options.g
+   if (options.a)
+   	artifactId = options.a
+   if (options.v)
+   	version = options.v
+   if (options.c)
+      classifier = options.c
+   if (options.p)
+      type = options.p
+}
+
+if (!options || !groupId || !artifactId || !version) {
+	println 'mvnfetch: must specify an artifactId, groupId, and version'
+	return
+}
+
+def repositoryAliases = [
+	'central': 'http://repo1.maven.org/maven2',
+   'jboss': 'http://repository.jboss.org/nexus/content/groups/public',
+	'jboss-legacy': 'http://repository.jboss.org/maven2',
+	'glassfish': 'http://download.java.net/maven/glassfish',
+   'java.net': 'http://download.java.net/maven/2'
+]
+
+def repository = options.r ? options.r : "central"
+
+if (repositoryAliases[repository]) {
+	repository = repositoryAliases[repository]
+}
+
+new File('.mvnfetch.xml').write("""
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>mvnfetch</groupId>
+	<artifactId>mvnfetch</artifactId>
+	<version>1.0</version>
+	<repositories>
+		<repository>
+			<id>repository</id>
+			<url>$repository</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${artifactId}</artifactId>
+			<version>${version}</version>
+         <classifier>${classifier}</classifier>
+         <type>${type}</type>
+		</dependency>
+	</dependencies>
+</project>""")
+
+def proc = "mvn -f .mvnfetch.xml dependency:resolve".execute()
+proc.in.eachLine { println it }
+proc.waitFor()
+
+if (!options.x) {
+	"/bin/rm .mvnfetch.xml".execute()
+}

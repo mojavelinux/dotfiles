@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Categories=Development;Java;IDE
+Name=IntelliJ IDEA
+Exec=/home/dallen/opt/idea/bin/idea.sh
+TryExec=
+X-GNOME-DocPath=
+Terminal=false
+GenericName[en_US]=IntelliJ IDEA
+Comment[en_US]=Develop Java programs
+Icon=/home/dallen/.local/share/applications/idea32.png

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+LAUNCHER_DIR=`dirname $0`
+ECLIPSE_HOME=`readlink -f $LAUNCHER_DIR`
+ECLIPSE_USERDIR=$HOME/.eclipse
+
+# Load JNI libraries (native library interface)
+#export LD_LIBRARY_PATH=/usr/lib/jni
+
+if [ -e $ECLIPSE_USERDIR/gtkrc-2.0 ]; then
+    export GTK2_RC_FILES=$ECLIPSE_USERDIR/gtkrc-2.0
+fi
+
+# -clean : add this flag to have Eclipse clean the workspace on start
+# -consolelog : add this flag to output Eclipse error messages to console
+exec $ECLIPSE_HOME/eclipse \
+    -user $ECLIPSE_USERDIR \
+    -data $ECLIPSE_USERDIR/workspace \
+    -showLocation \
+    "$@"
+exit 0
