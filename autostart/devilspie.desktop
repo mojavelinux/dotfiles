@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/devilspie
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Devil's Pie
+Name=Devil's Pie
+Comment[en_US]=Execute rules on windows
+Comment=Execute rules on windows
