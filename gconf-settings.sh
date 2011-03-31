@@ -186,11 +186,11 @@ gconftool-2 --type bool --set /desktop/gnome/url-handlers/mailto/enabled 1
 gconftool-2 --type bool --set /desktop/gnome/url-handlers/mailto/needs_terminal 1
 
 # Revelation
-gconftool-2 --type bool --set /apps/revelation/file/autoload 1
-gconftool-2 --type string --set /apps/revelation/file/autoload_file "sftp://devilkin@mojave/home/devilkin/config/accounts.data"
-gconftool-2 --type bool --set /apps/revelation/view/passwords 1
-gconftool-2 --type bool --set /apps/revelation/view/passwords 0
-gconftool-2 --type bool --set /apps/revelation/view/searchbar 1
+#gconftool-2 --type bool --set /apps/revelation/file/autoload 1
+#gconftool-2 --type string --set /apps/revelation/file/autoload_file "sftp://devilkin@mojave/home/devilkin/config/accounts.data"
+#gconftool-2 --type bool --set /apps/revelation/view/passwords 1
+#gconftool-2 --type bool --set /apps/revelation/view/passwords 0
+#gconftool-2 --type bool --set /apps/revelation/view/searchbar 1
 
 # Rhythmbox
 gconftool-2 --type string --set /apps/rhythmbox/library_layout_filename "%ta - %tt" 
