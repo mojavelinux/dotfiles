@@ -10,12 +10,17 @@ gconftool-2 --type bool --set /desktop/gnome/accessibility/keyboard/stickykeys_m
 gconftool-2 --type bool --set /desktop/gnome/accessibility/keyboard/stickykeys_two_key_off 0
 gconftool-2 --type int --set /desktop/gnome/peripherals/keyboard/delay 250
 gconftool-2 --type int --set /desktop/gnome/peripherals/keyboard/rate 40
+gconftool-2 --type list --list-type string --set /desktop/gnome/peripherals/keyboard/kbd/options ["ctrl	ctrl:nocaps","terminate	terminate:ctrl_alt_bksp"]
+
+# Touchpad settings
 gconftool-2 --type bool --set /desktop/gnome/peripherals/touchpad/disable_while_typing 0 # Starting syndaemon manually
 gconftool-2 --type bool --set /desktop/gnome/peripherals/touchpad/horiz_scroll_enabled 1
 gconftool-2 --type bool --set /desktop/gnome/peripherals/touchpad/tap_to_click 1
-gconftool-2 --type list --list-type string --set /desktop/gnome/peripherals/keyboard/kbd/options ["ctrl	ctrl:nocaps","terminate	terminate:ctrl_alt_bksp"]
+gconftool-2 --type int --set /desktop/gnome/peripherals/touchpad/scroll_method 2
 
 # Mouse settings
+gconftool-2 --type float --set /desktop/gnome/peripherals/mouse/motion_acceleration 2
+gconftool-2 --type int --set /desktop/gnome/peripherals/mouse/motion_threshold 5
 #gconftool-2 --type int --set /desktop/gnome/peripherals/mouse/cursor_size 24 # 24, 36, 48
 #gconftool-2 --type bool --set /apps/compiz/plugins/ezoom/screen0/options/hide_original_mouse 1
 #gconftool-2 --type bool --set /apps/compiz/plugins/ezoom/screen0/options/scale_mouse 1
@@ -108,10 +113,10 @@ gconftool-2 --type string --set /apps/gnome-terminal/keybindings/zoom_in "<Ctrl>
 
 # Power settings
 gconftool-2 --type string --set /apps/gnome-power-manager/actions/critical_battery "suspend"
-gconftool-2 --type bool --set /apps/gnome-power-manager/backlight/battery_reduce 1
 gconftool-2 --type int --set /apps/gnome-power-manager/backlight/brightness_ac 100
 gconftool-2 --type int --set /apps/gnome-power-manager/backlight/brightness_dim_battery 50
-gconftool-2 --type bool --set /apps/gnome-power-manager/backlight/enable 1
+gconftool-2 --type bool --set /apps/gnome-power-manager/backlight/battery_reduce 1 # manual override of 0 on envy
+gconftool-2 --type bool --set /apps/gnome-power-manager/backlight/enable 1 # manual override of 0 on envy
 gconftool-2 --type bool --set /apps/gnome-power-manager/backlight/idle_dim_ac 0
 gconftool-2 --type bool --set /apps/gnome-power-manager/backlight/idle_dim_battery 0 
 gconftool-2 --type string --set /apps/gnome-power-manager/buttons/lid_ac "blank"

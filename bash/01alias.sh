@@ -64,6 +64,7 @@ alias myip="/sbin/ifconfig | grep -o 'inet addr:[^ ]*' | sed 's/inet addr://' | 
 alias phplint='php -l'
 alias gdl='gradle'
 alias mci='mvn clean install'
+alias mdt='mvn dependency:tree | vim -'
 alias histup='history -r'
 alias links='elinks'
 # Add an "alert" alias for long running commands.  Use like so:
