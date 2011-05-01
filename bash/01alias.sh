@@ -71,7 +71,8 @@ alias links='elinks'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias jbosslog='tail -f $JBOSS_HOME/server/default/log/server.log'
+alias tailjb='tail -f server/default/log/server.log'
+alias tailgf='tail -f glassfish/domains/domain1/logs/server.log'
 
 # CVS aliases
 alias cvscheck='cvs -nq update -Pd 2>&1 | grep -v "cvs update: New directory"'
