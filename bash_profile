@@ -30,7 +30,8 @@ pathmunge $GRADLE_HOME/bin
 pathmunge $GLASSFISH_HOME/bin
 pathmunge $FORGE_HOME/bin
 pathmunge $PYTHON_EXT_HOME/bin
-#pathmunge $GEM_HOME/bin
+pathmunge $GEM_HOME/bin
+pathmunge $JRUBY_HOME/bin
 #pathmunge $MOZILLA_FIVE_HOME
 if [ -d ~/bin ] ; then
     pathmunge ~/bin

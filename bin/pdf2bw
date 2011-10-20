@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+   echo "Please supply a PDF file to convert"
+   exit 1
+fi
+
+FILE=$1
+FILE_BASENAME=${FILE%.pdf}
+FILE_BW=$FILE_BASENAME-bw.pdf
+
+gs -sOutputFile=$FILE_BW -sDEVICE=pdfwrite -sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray -dCompatibilityLevel=1.6 $FILE < /dev/null
+
+exit 0

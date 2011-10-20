@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=SlideRocket Player
+Comment=Playback SlideRocket presentations from your desktop and without an internet connection
+GenericName=SlideRocket Player
+Exec='/opt'/'SlideRocket Player'/bin/'SlideRocket Player'
+Type=Application
+Terminal=false
+Icon=sliderocketplayer
+StartupNotify=true
+X-KDE-StartupNotify=true
+Categories=Utility;
+X-AppInstall-Package=sliderocketplayer
+X-AppInstall-Section=main
+

@@ -11,4 +11,8 @@
 
 . ~/.bash_profile
 
+# hack to work on Natty
+COMPIZ_CONFIG_PROFILE=ubuntu
+export COMPIZ_CONFIG_PROFILE
+
 exec x-session-manager

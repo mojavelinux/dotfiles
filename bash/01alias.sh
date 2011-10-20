@@ -67,9 +67,12 @@ alias mci='mvn clean install'
 alias mdt='mvn dependency:tree | vim -'
 alias histup='history -r'
 alias links='elinks'
+alias aweserve='awestruct --auto --server'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+function say() { espeak -a20 -p90 "$@" 2> /dev/null ; }
 
 alias tailjb='tail -f server/default/log/server.log'
 alias tailgf='tail -f glassfish/domains/domain1/logs/server.log'
@@ -83,9 +86,13 @@ alias svncheck='svn merge --dry-run -r BASE:HEAD .'
 
 # swap Java version aliases
 # also see http://gist.github.com/23190
-alias java6="export PATH=`echo $PATH | sed \"s;:$HOME/opt/java\(-[^/]*\)\?/bin;:/home/dallen/opt/java-6-sun/bin;\"`
-export JAVA_HOME=$HOME/opt/java-6-sun
+# also see http://blog.emmanuelbernard.com/2011/01/script-to-hot-switch-jdk-versions-in-mac-os-x/
+alias java6="export PATH=`echo $PATH | sed \"s;:$HOME/opt/java\(-[^/]*\)\?/bin;:/home/dallen/opt/java-6-openjdk/bin;\"`
+export JAVA_HOME=$HOME/opt/java-6-openjdk
 export JAVA_MAJOR_VERSION=6"
-alias java5="export PATH=`echo $PATH | sed \"s;:$HOME/opt/java\(-[^/]*\)\?/bin;:/home/dallen/opt/java-5-sun/bin;\"`
-export JAVA_HOME=$HOME/opt/java-5-sun
-export JAVA_MAJOR_VERSION=5"
+alias java7="export PATH=`echo $PATH | sed \"s;:$HOME/opt/java\(-[^/]*\)\?/bin;:/home/dallen/opt/java-7-openjdk/bin;\"`
+export JAVA_HOME=$HOME/opt/java-7-openjdk
+export JAVA_MAJOR_VERSION=7"
+#alias java5="export PATH=`echo $PATH | sed \"s;:$HOME/opt/java\(-[^/]*\)\?/bin;:/home/dallen/opt/java-5-sun/bin;\"`
+#export JAVA_HOME=$HOME/opt/java-5-sun
+#export JAVA_MAJOR_VERSION=5"

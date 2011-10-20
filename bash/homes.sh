@@ -19,6 +19,8 @@ export PYTHON_EXT_HOME=$HOME/opt/python-ext
 export PYTHONPATH=$PYTHON_EXT_HOME/lib/python2.6/site-packages
 export FORGE_HOME=$HOME/opt/forge
 #export GEM_HOME=/var/lib/gems/1.8
+export TORQUEBOX_HOME=$HOME/opt/torquebox
+export JRUBY_HOME=$TORQUEBOX_HOME/jruby
 # we get a lot of fake mozilla/firefox directories, so detect a real one by looking for the chrome directory
 #export MOZILLA_FIVE_HOME=`ls -1rd /usr/lib/*firefox*/chrome 2>/dev/null | head -1 | xargs dirname 2>/dev/null`
 #if [ -d $HOME/.mozilla/plugins ] ; then
