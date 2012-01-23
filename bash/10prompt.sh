@@ -4,6 +4,7 @@
 [ -z "$PS1" ] && return
 
 DISTRO=`cat /etc/issue | head -1`
+DISTRO='other'
 
 case "$DISTRO" in
     Red*)
