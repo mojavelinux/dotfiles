@@ -1,0 +1,6 @@
+<Ctrl><Alt>T R : Run JUnit Test
+<Ctrl><Alt>T D : Debug JUnit Test
+<Ctrl><Shift>P : Publish (In Servers View)
+<Ctrl><Alt>B : Build Clean
+<Ctrl>- : Zoom In
+<Ctrl>+ : Zoom Out

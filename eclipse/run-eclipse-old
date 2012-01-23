@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# This script is used to prepare and execute the native eclipse binary, eclipse.bin
+ 
+LAUNCHER_DIR=`dirname $0`
+ECLIPSE_HOME=`readlink -f $LAUNCHER_DIR`
+ECLIPSE_USERDIR=$HOME/.eclipse
+#ECLIPSE_USERDIR=$HOME/demos/devoxx09
+
+# Force Java override
+unset JAVA_HOME
+
+JAVA_HOME_PATHS=(
+	$HOME/opt/java
+	$HOME/opt/java-6-sun
+	/usr/lib/jvm/java-6-sun
+	$HOME/opt/java-5-sun
+	/usr/lib/jvm/java-5-sun
+)
+ 
+# Setup Java environment if not already available
+if [ -z $JAVA_HOME ]; then
+	for JAVA_HOME_PATH in ${JAVA_HOME_PATHS[@]}; do
+		if [ -d $JAVA_HOME_PATH ]; then
+			export JAVA_HOME=$JAVA_HOME_PATH
+			echo JAVA_HOME=$JAVA_HOME
+			break
+		fi
+	done;
+
+	if [ -z $JAVA_HOME ]; then
+        echo Cannot locate a Java runtime environment!  Please set JAVA_HOME
+        exit 1
+	fi
+
+	if ! echo $PATH | /bin/egrep -q "(^|:)$JAVA_HOME($|:)" ; then
+		PATH=$JAVA_HOME/bin:$PATH
+	fi
+fi
+ 
+# Basic JDK Options
+JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=512m -Denv.JAVA_HOME=$JAVA_HOME"
+
+# Sun JDK Options
+#JAVA_OPTS="$JAVA_OPTS -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -XX:+UseConcMarkSweepGC -XX:+CMSPermGenSweepingEnabled -XX:+CMSClassUnloadingEnabled -Dosgi.bundlefile.limit=100"
+
+# What I'm doing here is taking advantage of the JDK5.0 garbage collection
+# "ergonomics" feature to let the JVM self tune. It's only active with the
+# UseParallelGC collector (also called the parallel scavenge collector). Note
+# there is no -XmxNNNm option to set the heap size. According to the doc, any
+# sizing or tweaking options will disable self tuning because it figures we know
+# better than it does.  (This may only work with two processors)
+#JAVA_OPTS="-XX:+UseParallelGC"
+ 
+# Add the following flag to vmargs to enable jmx remote management (Sun JVM)
+#JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote"
+ 
+# Link to correct mozilla libraries
+unset MOZILLA_FIVE_HOME
+if [ -z $MOZILLA_FIVE_HOME ]; then
+    export MOZILLA_FIVE_HOME=`ls -1rd /usr/lib/*firefox*/chrome 2>/dev/null | head -1 | xargs dirname 2>/dev/null`
+fi
+
+# workaround for Karmic - http://bit.ly/T8MIc
+if [ `lsb_release -c -s` == "karmic" ]; then
+    export GDK_NATIVE_WINDOWS=true
+fi
+
+# Load JNI libraries (native library interface)
+export LD_LIBRARY_PATH=/usr/lib/jni
+ 
+if [ -e $ECLIPSE_USERDIR/gtkrc-2.0 ]; then
+    export GTK2_RC_FILES=$ECLIPSE_USERDIR/gtkrc-2.0
+fi
+ 
+$ECLIPSE_HOME/eclipse.bin \
+    -showsplash org.eclipse.platform \
+    --launcher.XXMaxPermSize 256M \
+    -user $ECLIPSE_USERDIR \
+    -data $ECLIPSE_USERDIR/workspace \
+    -showLocation \
+    "$@" \
+    -vmargs $JAVA_OPTS
+exit 0
+#    -clean \ # enable by adding -clean from commandline
+# -consolelog # outputs Eclipse error messages to console
