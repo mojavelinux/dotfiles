@@ -1,3 +1,9 @@
+MBP built-ins:
+Delete : actually backspace
+Fn+Delete : real delete
+Fn+Up : Page Up
+Fn+Down : Page Down
+
 Session:
 <Super>l : lock screen
 <Super>End : power down options
