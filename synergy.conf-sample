@@ -1,0 +1,11 @@
+section: screens
+    computer1:
+    computer2:
+end
+
+section: links
+    computer2:
+        left = computer1
+    computer1:
+        right = computer2
+end
