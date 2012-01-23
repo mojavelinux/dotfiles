@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=H2 Console
+Type=Application
+Terminal=false
+Name[en_US]=H2 Console
+Exec=java -cp /home/dallen/opt/jdbc-drivers/h2-latest.jar org.h2.tools.Console -web
+Comment[en_US]=Manage H2 databases
+Icon[en_US]=/home/dallen/config/h2.png
+Comment=Manage H2 databases
+Icon=/home/dallen/config/h2.png
+GenericName[en_US]=
