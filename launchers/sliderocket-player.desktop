@@ -1,14 +1,13 @@
 [Desktop Entry]
 Name=SlideRocket Player
-Comment=Playback SlideRocket presentations from your desktop and without an internet connection
+Name[en_US]=SlideRocket Player
+Comment=Play SlideRocket presentations from your desktop in offline mode
 GenericName=SlideRocket Player
 Exec='/opt'/'SlideRocket Player'/bin/'SlideRocket Player'
 Type=Application
 Terminal=false
-Icon=sliderocketplayer
+Icon=/home/dallen/.local/share/applications/sliderocket.png
+Icon[en_US]=/home/dallen/.local/share/applications/sliderocket.png
 StartupNotify=true
 X-KDE-StartupNotify=true
-Categories=Utility;
-X-AppInstall-Package=sliderocketplayer
-X-AppInstall-Section=main
-
+Categories=Office;Viewer;Utility;
