@@ -9,7 +9,7 @@ gconftool-2 --type bool --set /desktop/gnome/accessibility/keyboard/stickykeys_e
 gconftool-2 --type bool --set /desktop/gnome/accessibility/keyboard/stickykeys_modifier_beep 0
 gconftool-2 --type bool --set /desktop/gnome/accessibility/keyboard/stickykeys_two_key_off 0
 gconftool-2 --type int --set /desktop/gnome/peripherals/keyboard/delay 250
-gconftool-2 --type int --set /desktop/gnome/peripherals/keyboard/rate 40
+gconftool-2 --type int --set /desktop/gnome/peripherals/keyboard/rate 30
 gconftool-2 --type list --list-type string --set /desktop/gnome/peripherals/keyboard/kbd/options ["ctrl	ctrl:nocaps","terminate	terminate:ctrl_alt_bksp"]
 
 # Touchpad settings
@@ -141,7 +141,7 @@ gconftool-2 --type int --set /apps/glipper/max_item_length 99
 gconftool-2 --type int --set /apps/glipper/max_elements 99
 gconftool-2 --type list --list-type string --set /apps/glipper/autostart_plugins ["nopaste","grow"]
 
-# Volumne
+# Volume 
 gconftool-2 --type int --set /apps/gnome_settings_daemon/volume_step 2
 
 # Screensaver settings
@@ -166,7 +166,7 @@ gconftool-2 --type int --set /apps/panel/toplevels/bottom_panel_screen0/unhide_d
 # Gedit
 gconftool-2 --type bool --set /apps/gedit-2/preferences/editor/save/create_backup_copy 0
 gconftool-2 --type bool --set /apps/gedit-2/preferences/editor/tabs/insert_spaces 1
-gconftool-2 --type int --set /apps/gedit-2/preferences/editor/tabs/tabs_size 3
+gconftool-2 --type int --set /apps/gedit-2/preferences/editor/tabs/tabs_size 4
 gconftool-2 --type bool --set /apps/gedit-2/preferences/editor/bracket_matching/bracket_matching 1
 gconftool-2 --type bool --set /apps/gedit-2/preferences/editor/line_numbers/display_line_numbers 1
 gconftool-2 --type bool --set /apps/gedit-2/preferences/editor/right_margin/display_right_margin 1
