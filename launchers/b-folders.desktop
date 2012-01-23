@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=B-Folders
+Name[en_US]=B-Folders
+Icon=/home/dallen/opt/b-folders/icon.xpm
+Icon[en_US]=/home/dallen/opt/b-folders/icon.xpm
+Comment=Manage accounts and passwords
+Comment[en_US]=Manage accounts and passwords
+Exec=/home/dallen/opt/b-folders/b-folders
+Type=Application
+Terminal=false
