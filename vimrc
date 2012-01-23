@@ -13,6 +13,7 @@ set sc                  " Show partial command in lower-right corner
 set bs=2                " allow backspacing over everything in insert mode
 set ai                  " always set autoindenting on
 set nobackup            " do not keep a backup file, use versions instead
+set bdir=~/.vim,~/tmp   " directory where the backup file is temporarily stored
 set viminfo='20,\"50    " read/write a .viminfo file, don't store > 50 lines
 set history=50          " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
