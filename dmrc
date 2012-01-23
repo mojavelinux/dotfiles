@@ -3,3 +3,5 @@
 Session=xsession
 Language=en_US.utf8
 Layout=us
+Langlist=en_US:en
+LCMess=en_US.UTF-8
