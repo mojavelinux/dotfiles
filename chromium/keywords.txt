@@ -1,4 +1,4 @@
-Free Thesaurus Lookup   link      http://freethesaurus.net/s.php?q=%s
+Free Thesaurus Lookup   like      http://freethesaurus.net/s.php?q=%s
 JBoss Issue             jbissue   https://issues.jboss.org/browse/%s
 JBoss Community Profile jbprofile http://community.jboss.org/people/%s
 Java EE 6 API           javaee    http://download.oracle.com/javaee6/6/api/%s.html
