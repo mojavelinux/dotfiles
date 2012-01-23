@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ ! -z "$1" ]; then
+    sleep $1
+elif [ ! -z "$DESKTOP_AUTOSTART_ID" ]; then
+    sleep 10
+fi
+
+synclient \
+    ClickFinger2=2 \
+    TapButton2=3
+
+exit 0

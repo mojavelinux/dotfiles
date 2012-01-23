@@ -1,0 +1,11 @@
+
+[Desktop Entry]
+Type=Application
+Exec=/home/dallen/bin/tweak-touchpad-settings
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Touchpad Settings
+Name=Touchpad Settings
+Comment[en_US]=Configure behavior of the touchpad
+Comment=Configure behavior of the touchpad
