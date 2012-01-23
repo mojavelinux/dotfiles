@@ -33,6 +33,7 @@ pathmunge $PYTHON_EXT_HOME/bin
 pathmunge $GEM_HOME/bin
 pathmunge $JRUBY_HOME/bin
 #pathmunge $MOZILLA_FIVE_HOME
+pathmunge $HOME/opt/b-folders
 if [ -d ~/bin ] ; then
     pathmunge ~/bin
 fi
