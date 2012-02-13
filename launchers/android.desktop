@@ -1,13 +1,14 @@
+#!/usr/bin/env xdg-open
+
 [Desktop Entry]
-Version=1.0
 Encoding=UTF-8
+Version=1.0
 Name=Android IDE
+Name[en_US]=Android IDE
+Icon=/home/dallen/config/launchers/android.svg
+Comment=Develop Android applications
+Comment[en_US]=Develop Android applications
+Exec=/home/dallen/opt/android-ide/eclipse
 Type=Application
 Terminal=false
 Categories=Development;Java;IDE
-Name[en_US]=Android IDE
-Exec=/home/dallen/opt/android-ide/eclipse
-Comment[en_US]=Develop Android applications
-Comment=Develop Android applications
-Icon=/home/dallen/config/launchers/android.svg
-GenericName[en_US]=
