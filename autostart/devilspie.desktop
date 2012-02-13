@@ -3,6 +3,8 @@
 Type=Application
 Exec=/usr/bin/devilspie
 Hidden=false
+Terminal=false
+StartupNotify=false
 X-GNOME-Autostart-enabled=true
 Name[en_US]=Devil's Pie
 Name=Devil's Pie
