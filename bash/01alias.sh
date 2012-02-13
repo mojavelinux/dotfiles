@@ -32,6 +32,8 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias ll='ls -l'
 alias la='ls -A'
+alias lh='ls -ad -I .?*'
+alias llh='ls -lad -I .?*'
 alias l='ls -CF'
 alias df='df -h'
 alias path='readlink -f'
@@ -49,6 +51,7 @@ alias flush='history -c && reset'
 alias sshx='ssh -X'
 alias v="vim"
 alias vd="vimdiff"
+alias view="vim -R"
 alias ftp='ncftp'
 alias ftpb='ncftpbookmarks'
 alias jad='jad -s java'
@@ -67,7 +70,7 @@ alias mci='mvn clean install'
 alias mdt='mvn dependency:tree | vim -'
 alias histup='history -r'
 alias links='elinks'
-alias aweserve='awestruct --auto --server'
+alias aweserve='awestruct -d'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
