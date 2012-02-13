@@ -1,6 +1,13 @@
+; http://www.foosel.org/linux/devilspie
 (if
-  (is (window_class) "Gnome-terminal")
+  (and
+    (is (window_class) "Gnome-terminal")
+    (is (window_name) "Terminal")
+  )
   (begin
+    (set_workspace 2)
     (maximize)
+    (undecorate)
+    (focus)
   )
 )
