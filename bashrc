@@ -14,7 +14,7 @@ if [ -z "$BASH_COMPLETION" -a -f /etc/bash_completion ] && ! shopt -oq posix; th
 fi
 
 # Execute all scripts in ~/.bash directory
-for i in ~/.bash/[0-9][0-9]*.sh; do
+for i in ~/.bash.d/[0-9][0-9]*.sh; do
     if [ -x "$i" ]; then
         . $i
     fi

@@ -19,7 +19,7 @@ pathmunge () {
 
 pathmunge /usr/sbin # Red Hat doesn't like to give us this by default
 
-. ~/.bash/homes.sh
+. ~/.bash.d/homes.sh
 pathmunge $JAVA_HOME/bin
 pathmunge $GROOVY_HOME/bin
 pathmunge $ANT_HOME/bin
