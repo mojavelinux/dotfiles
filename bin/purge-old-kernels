@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ `which package-cleanup 2>/dev/null` ]; then
+  sudo package-cleanup --oldkernels --count 1
+  exit 0
+else
+  echo "Script not supported on this system"
+  exit 1
+fi

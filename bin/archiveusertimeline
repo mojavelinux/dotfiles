@@ -1,0 +1,246 @@
+#!/usr/bin/env groovy
+
+import groovyx.net.http.RESTClient
+import groovy.xml.MarkupBuilder
+import org.apache.commons.lang.StringEscapeUtils
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.TwitterApi;
+import org.scribe.model.Verifier;
+import org.scribe.oauth.OAuthService;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Response;
+import org.scribe.model.Token;
+import org.scribe.model.Verb;
+
+def cli = new CliBuilder(usage: "archiveusertimeline [OPTION]")
+cli.c(longOpt: "credentials", args: 1, required: true, "OAuth credentials file")
+
+// Credentials file format:
+// username=
+// key=
+// secret=
+// authToken=
+// authSecret=
+
+def opts = cli.parse(args)
+
+if (opts == null || !opts.c) {
+    println "Must provide authorization credentials file"
+    return
+}
+
+def auth = new Properties()
+new File(opts.c).withInputStream { is ->
+    auth.load(is)
+}
+
+def u = auth['username']
+def key = auth['key']
+def secret = auth['secret']
+def authToken = auth['authToken']
+def authSecret = auth['authSecret']
+
+if (u == null || key == null || secret == null || authToken == null || authSecret == null) {
+    println "Credentials missing from specified configuration file"
+    return
+}
+
+def f = new File(System.getProperty("user.home") + "/docs/timelines/" + u + ".xml")
+
+def lastId
+def archive
+def numStatuses = 0
+if (f.exists() && f.length() > 0) {
+   archive = new XmlSlurper().parseText(f.text)
+   lastId = archive.status[0].id.text()
+   def lastDate = archive.status[0].created_at.text()
+   numStatuses = archive.status[0].status_number.text().toInteger()
+   println "Grabbing tweets since ${lastId} created at ${lastDate}"
+}
+
+def DATE_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy"
+def TWITTER_API_URL = "http://api.twitter.com"
+
+OAuthService service = new ServiceBuilder()
+   .provider(TwitterApi.class)
+   .apiKey(key)
+   .apiSecret(secret)
+   .build();
+Token accessToken = new Token(authToken, authSecret)
+
+String toQueryString(Map<String, String> p)
+{
+   String q = ""
+   p.each { k, v ->
+      q += (q.length() == 0 ? "?" : "&") + k + "=" + v
+   }
+   return q
+}
+
+def page = 1
+
+def params = [count: 200]
+if (lastId) {
+   params.since_id = lastId
+}
+
+def timeline = []
+def numTotal = 0
+Response res = null
+
+while (true) {
+   params.page = page
+   if (page > 1) {
+      // rest so we don't look like a DoS attack
+      sleep 5000
+   }
+   OAuthRequest req = new OAuthRequest(Verb.GET, TWITTER_API_URL + '/1/statuses/user_timeline.xml' + toQueryString(params))
+   service.signRequest(accessToken, req)
+   res = req.send()
+   def statuses = new XmlSlurper().parseText(res.body)
+   def statusesResults = statuses.status.size()
+
+   if (statusesResults == 0) {
+      break;
+   }
+   numTotal += statusesResults
+   println "Fetched ${statusesResults} tweets (total: ${numTotal})"
+   def statusesIt = statuses.status.iterator()
+   while (statusesIt.hasNext()) {
+      timeline += statusesIt.next()
+   }
+   page++
+}
+
+page = 1
+def newRetweets = false
+
+while (true) {
+   params.page = page
+
+   // rest so we don't look like a DoS attack
+   sleep 5000
+
+   OAuthRequest req = new OAuthRequest(Verb.GET, TWITTER_API_URL + '/1/statuses/retweeted_by_me.xml' + toQueryString(params))
+   service.signRequest(accessToken, req)
+   res = req.send()
+   def retweets = new XmlSlurper().parseText(res.body)
+   def retweetsResults = retweets.status.size()
+
+   if (retweetsResults == 0) {
+      break;
+   }
+   newRetweets = true
+   numTotal += retweetsResults
+   println "Fetched ${retweetsResults} retweets (total: ${numTotal})"
+   def retweetsIt = retweets.status.iterator()
+   while (retweetsIt.hasNext()) {
+      timeline += retweetsIt.next()
+   }
+   page++
+}
+
+if (newRetweets) {
+   // merge retweets with statuses by date
+   timeline.sort() { a, b ->
+      Date.parse(DATE_FORMAT, a.created_at.text())
+         .after(Date.parse(DATE_FORMAT, b.created_at.text())) ? -1 : 1
+   }
+}
+
+numStatuses += timeline.size()
+def statusNumber = numStatuses
+
+def writer = new FileWriter(f)
+def xml = new MarkupBuilder(writer)
+xml.setDoubleQuotes(true)
+xml.mkp.xmlDeclaration(version:'1.0', encoding:'UTF-8')
+
+xml.statuses(type:"array") {
+   timeline.each { e ->
+      status() {
+         created_at(e.created_at.text()) 
+         id(e.id.text())
+         status_number(statusNumber--)
+         text(StringEscapeUtils.unescapeXml(e.text.text()))
+         link(TWITTER_API_URL + "/#!/" + u + "/status/" + e.id.text())
+         source(e.source.text())
+         truncated(e.truncated.text())
+         in_reply_to_status_id(e.in_reply_to_status_id.text())
+         in_reply_to_user_id(e.in_reply_to_user_id.text())
+         in_reply_to_screen_name(e.in_reply_to_screen_name.text())
+         if (e.retweeted_status.size() != 0) {
+            retweeted_status() {
+               created_at(e.retweeted_status.created_at.text())
+               id(e.retweeted_status.id.text())
+               text(StringEscapeUtils.unescapeXml(e.retweeted_status.text.text()))
+               link(TWITTER_API_URL + "/#!/" + e.retweeted_status.user.screen_name + "/status/" + e.retweeted_status.id.text())
+               source(e.retweeted_status.source.text())
+               truncated(e.retweeted_status.truncated.text())
+               in_reply_to_status_id(e.retweeted_status.in_reply_to_status_id.text())
+               in_reply_to_user_id(e.retweeted_status.in_reply_to_user_id.text())
+               in_reply_to_screen_name(e.retweeted_status.in_reply_to_screen_name.text())
+               user() {
+                  id(e.retweeted_status.user.id.text())
+                  name(e.retweeted_status.user.name.text())
+                  screen_name(e.retweeted_status.user.screen_name.text())
+               }
+            }
+         }
+         user() {
+            id(e.user.id.text())
+            name(e.user.name.text())
+            screen_name(e.user.screen_name.text())
+         }
+         geo() {
+            if (!"".equals(e.geo.text().trim())) {
+               point(e.geo.text().trim())
+            }
+         }
+      }
+   }
+   if (archive) {
+      archive.status.each { e ->
+         status() {
+            created_at(e.created_at.text()) 
+            id(e.id.text())
+            status_number(statusNumber--)
+            text(e.text.text())
+            link(TWITTER_API_URL + "/#!/" + u + "/status/" + e.id.text())
+            source(e.source.text())
+            truncated(e.truncated.text())
+            in_reply_to_status_id(e.in_reply_to_status_id.text())
+            in_reply_to_user_id(e.in_reply_to_user_id.text())
+            in_reply_to_screen_name(e.in_reply_to_screen_name.text())
+            if (e.retweeted_status.size() != 0) {
+               retweeted_status() {
+                  created_at(e.retweeted_status.created_at.text())
+                  id(e.retweeted_status.id.text())
+                  text(e.retweeted_status.text.text())
+                  link(e.retweeted_status.link.text())
+                  source(e.retweeted_status.source.text())
+                  truncated(e.retweeted_status.truncated.text())
+                  in_reply_to_status_id(e.retweeted_status.in_reply_to_status_id.text())
+                  in_reply_to_user_id(e.retweeted_status.in_reply_to_user_id.text())
+                  in_reply_to_screen_name(e.retweeted_status.in_reply_to_screen_name.text())
+                  user() {
+                     id(e.retweeted_status.user.id.text())
+                     name(e.retweeted_status.user.name.text())
+                     screen_name(e.retweeted_status.user.screen_name.text())
+                  }
+               }
+            }
+            user() {
+               id(e.user.id.text())
+               name(e.user.name.text())
+               screen_name(e.user.screen_name.text())
+            }
+            geo() {
+               if (e.geo['georss:point'].size() != 0) {
+                  'georss:point'('xmlns:georss':'http://www.georss.org/georss') { e.geo['georss:point'].text() }
+               }
+            }
+         }
+      }
+   }
+}

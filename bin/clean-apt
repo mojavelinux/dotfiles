@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ $UID != 0 ]; then
+  echo "Must run as root (i.e., sudo)"
+  exit 1
+fi
+
+apt-get clean
+rm /var/lib/apt/lists/*
+rm /var/lib/apt/lists/partial/*
+apt-get clean
+apt-get update

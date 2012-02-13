@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -z "$1" ] || [ "$2" == "POST-SETUP" ]; then
+  DISTRO=`lsb_release -si`
+  RELEASE_ID=`lsb_release -sri | tr '[:upper:]' '[:lower:]' | tr '\n' ' ' | sed 's/ $//' | sed 's/ /-/g'`
+  PACKAGES_FILE=$HOME/config/system/current/$RELEASE_ID-package-list.txt
+  PACKAGES_BY_SIZE_FILE=$HOME/config/system/current/$RELEASE_ID-package-list-by-size.txt
+  SETTINGS_FILE=$HOME/config/system/current/gsettings.txt
+
+  case "$DISTRO" in
+    Fedora*)
+      rpm -qa --qf "%{NAME}\t%{VERSION}-%{RELEASE}\t%{INSTALLTIME:date}\n" | sort > $PACKAGES_FILE
+      rpm -qa --qf '%10{SIZE} %{NAME}\n' | sort -n -r > $PACKAGES_BY_SIZE_FILE
+      gsettings list-recursively > $SETTINGS_FILE
+      ;;
+    Ubuntu*)
+	  dpkg --get-selections | grep "[[:space:]]install$" | sed 's/\t\+install//' > $PACKAGES_FILE
+      ;;
+    *)
+      /bin/true
+      ;;
+    esac
+fi

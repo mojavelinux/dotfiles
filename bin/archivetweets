@@ -1,0 +1,93 @@
+#!/usr/bin/env groovy
+
+import groovyx.net.http.RESTClient
+import groovy.xml.MarkupBuilder
+import org.apache.commons.lang.StringEscapeUtils
+
+def cli = new CliBuilder(usage: "archivetweets [OPTION]")
+cli.t(longOpt:"tag", args:1, required:false, "Hash tag to archive")
+cli.s(longOpt:"search", args:1, required:false, "Search to archive")
+cli.u(longOpt:"user", args:1, required:false, "User to archive")
+
+def opts = cli.parse(args)
+
+if (!opts.t && !opts.s && !opts.u) {
+    println "Must provide a hash tag, search or user to archive"
+    return
+}
+
+if (opts.t && (opts.s || opts.u) ||
+   opts.s && (opts.t || opts.u) ||
+   opts.u && (opts.t || opts.s)) {
+   println "Can only provide a hash tag, search or user to archive"
+   return
+}
+
+def query
+if (opts.s) {
+   query = opts.s
+}
+else if (opts.t) {
+   query = "#" + opts.t
+}
+
+def f = new File(System.getProperty("user.home") + "/docs/timelines/" + query + ".atom")
+
+def lastId
+def archive
+if (f.exists()) {
+   archive = new XmlSlurper().parseText(f.text)
+   lastId = archive.entry[0].id.text().split(':')[2]
+}
+
+def rest = new RESTClient("http://search.twitter.com/")
+
+def params = [q:query, rpp:100]
+if (lastId) {
+   params.since_id = lastId
+}
+
+def res = rest.get(
+   path : '/search.atom', 
+   query : params)
+
+def timeline = new XmlSlurper().parse(res.data)
+
+def writer = new FileWriter(f)
+//def writer = new StringWriter()
+def xml = new MarkupBuilder(writer)
+xml.setDoubleQuotes(true)
+xml.mkp.xmlDeclaration(version:'1.0', encoding:'UTF-8')
+
+xml.feed(xmlns:"http://www.w3.org/2005/Atom") {
+   title(query + " - Twitter Search")
+   timeline.entry.each { e ->
+      entry() {
+         id(e.id.text()) 
+         link(type:'text/html', href:e.link[0].@href.text(), rel:'alternate')
+         published(e.published.text())
+         title(e.title.text())
+         content(type:'html', StringEscapeUtils.unescapeXml(e.content.text()))
+         author() {
+            name(e.author.name.text())
+            uri(e.author.uri.text())
+         }
+      }
+   }
+   if (archive) {
+      archive.entry.each { e ->
+         entry() {
+            id(e.id.text()) 
+            link(type:'text/html', href:e.link[0].@href.text(), rel:'alternate')
+            published(e.published.text())
+            title(e.title.text())
+            content(type:'html', StringEscapeUtils.unescapeXml(e.content.text()))
+            author() {
+               name(e.author.name.text())
+               uri(e.author.uri.text())
+            }
+         }
+      }
+   }
+}
+//println writer.toString()
