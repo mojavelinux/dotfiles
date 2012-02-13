@@ -7,7 +7,6 @@ Exec='/opt'/'SlideRocket Player'/bin/'SlideRocket Player'
 Type=Application
 Terminal=false
 Icon=/home/dallen/.local/share/applications/sliderocket.png
-Icon[en_US]=/home/dallen/.local/share/applications/sliderocket.png
 StartupNotify=true
 X-KDE-StartupNotify=true
 Categories=Office;Viewer;Utility;

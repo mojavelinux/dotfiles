@@ -8,7 +8,6 @@ Categories=Development;Java;IDE
 Name[en_US]=Android IDE
 Exec=/home/dallen/opt/android-ide/eclipse
 Comment[en_US]=Develop Android applications
-Icon[en_US]=/home/dallen/config/launchers/android.svg
 Comment=Develop Android applications
 Icon=/home/dallen/config/launchers/android.svg
 GenericName[en_US]=

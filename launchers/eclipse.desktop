@@ -1,14 +1,15 @@
+#!/usr/bin/env xdg-open
+
 [Desktop Entry]
-Categories=Development;Java;IDE
 Encoding=UTF-8
 Version=1.0
-Type=Application
-Terminal=0
-Categories=Development;Java;IDE
-Name[en_US]=Eclipse
-Exec=/home/dallen/opt/eclipse/run-eclipse
-Comment[en_US]=Develop Java programs
-Icon[en_US]=/home/dallen/.local/share/applications/eclipse.svg
 Name=Eclipse
+Name[en_US]=Eclipse
+#Icon=/home/dallen/config/launchers/eclipse.svg
+Icon=eclipse
 Comment=Develop Java programs
-Icon=/home/dallen/config/launchers/eclipse.svg
+Comment[en_US]=Develop Java programs
+Exec=/home/dallen/opt/eclipse/run-eclipse
+Type=Application
+Terminal=false
+Categories=Development;Java;IDE
