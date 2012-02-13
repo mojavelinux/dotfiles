@@ -22,7 +22,7 @@ set incsearch           " do incremental searching
 set et                  " expands tabs to spaces
 set sw=3                " number of spaces to use for each step of indent
 set ts=3                " number of columns a tab will span
-set background=dark     " setup colors for a dark background
+"set background=dark     " setup colors for a dark background
 set modeline            " allow commands from file to be executed
 set wildmenu            " tab expansion leads to an inline menu of possible selections
 set foldmethod=marker   " allow vim folds
@@ -84,6 +84,8 @@ if has("autocmd")
   au BufRead,BufNewFile *.jspx setlocal ts=2 sw=2
   au BufRead *.jsp setlocal foldmarker=<%--,--%>
   au BufRead *.java setlocal foldmarker=/*\ ,*/
+
+  au BufRead,BufNewFile *.md setlocal syntax=markdown
 
   " Project-specific settings
 "  au BufRead,BufNewFile */mojarra-trunk*/* set et 
