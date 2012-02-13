@@ -1,0 +1,3 @@
+NameFormat "${album_artist} - ${title}.${suffix}"
+OutputDir "$HOME/media/music"
+AllowUppercase True
