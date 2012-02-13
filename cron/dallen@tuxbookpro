@@ -1,0 +1,3 @@
+GROOVY_HOME=$HOME/opt/groovy
+PATH=$HOME/bin:$GROOVY_HOME/bin
+* * * * * /usr/bin/env groovy -v >> /tmp/cron-output.txt
