@@ -1,0 +1,47 @@
+<backup>
+  <host name=""/>
+  <repo path="/media/tera/devilkin@mojave-backup" retention="7B"/>
+  <setup>
+    <script path="/home/devilkin/bin/backup-ninja-script"/>
+  </setup>
+  <data exclude-devices="true" exclude-fifos="true" exclude-sockets="true">
+    <exclude glob="/home/*/.DCOPserver*"/>
+    <exclude glob="/home/*/.adobe/Flash_Player"/>
+    <exclude glob="/home/*/.audacity*"/>
+    <exclude glob="/home/*/.cache"/>
+    <exclude glob="/home/*/.compiz"/>
+    <exclude glob="/home/*/.dbus"/>
+    <exclude glob="/home/*/.dvdcss"/>
+    <exclude glob="/home/*/.fishsrv.pl"/>
+    <exclude glob="/home/*/.fontconfig"/>
+    <exclude glob="/home/*/.gnome2/epiphany/ephy-favicon-cache.xml"/>
+    <exclude glob="/home/*/.gnome2/epiphany/mozilla/epiphany/Cache"/>
+    <exclude glob="/home/*/.gnome2/goobox.d/cache"/>
+    <exclude glob="/home/*/.gvfs"/>
+    <exclude glob="/home/*/.java"/>
+    <exclude glob="/home/*/.jnlp-applet"/>
+    <exclude glob="/home/*/.local/share/Trash"/>
+    <exclude glob="/home/*/.m2/repository"/>
+    <exclude glob="/home/*/.opera/cache"/>
+    <exclude glob="/home/*/.opera/icons"/>
+    <exclude glob="/home/*/.opera/thumbnails"/>
+    <exclude glob="/home/*/.opera/opcache"/>
+    <exclude glob="/home/*/.macromedia/Flash_Player"/>
+    <exclude glob="/home/*/.mozilla-thunderbird/*/ImapMail"/>
+    <exclude glob="/home/*/.mozilla/firefox/*/Cache"/>
+    <exclude glob="/home/*/.nautilus"/>
+    <exclude glob="/home/*/.pulse*"/>
+    <exclude glob="/home/*/.sudo_as_admin_successful"/>
+    <exclude glob="/home/*/.thumbnails"/>
+    <exclude glob="/home/*/.xsession-errors"/>
+    <exclude glob="/home/*/opt"/>
+    <exclude glob="/home/*/tmp"/>
+    <exclude path="/etc/apt/apt.conf.d"/>
+    <exclude glob="/etc/apt/*.gpg*"/>
+    <include path="/home/devilkin"/>
+    <include path="/etc/X11/xorg.conf"/>
+    <include path="/etc/apt"/>
+    <include path="/etc/hosts"/>
+    <include path="/etc/safekeep"/>
+  </data>
+</backup>
