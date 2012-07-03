@@ -1,9 +1,6 @@
 <backup>
   <host name="ideapad" user="sarah"/>
-  <repo path="/media/tera/sarah@ideapad-backup" retention="7B"/>
-  <setup>
-    <script path="/home/dallen/bin/backup-ninja-script"/>
-  </setup>
+  <repo path="/run/media/devilkin/tera/sarah@ideapad-backup" retention="7B"/>
   <data exclude-devices="true" exclude-fifos="true" exclude-sockets="true">
     <exclude glob="/home/*/.adobe/Flash_Player"/>
     <exclude glob="/home/*/.adobe/Acrobat/*/*Cache*"/>

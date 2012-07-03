@@ -1,6 +1,6 @@
 <backup>
   <host name="tuxbookpro" user="dallen"/>
-  <repo path="/media/tera/dallen@tuxbookpro-backup" retention="7B"/>
+  <repo path="/run/media/devilkin/tera/dallen@tuxbookpro-backup" retention="7B"/>
   <setup>
     <script path="/home/dallen/bin/backup-ninja-script"/>
   </setup>

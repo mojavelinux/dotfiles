@@ -1,6 +1,6 @@
 <backup>
   <host name=""/>
-  <repo path="/media/tera/devilkin@mojave-backup" retention="7B"/>
+  <repo path="/run/media/devilkin/tera/devilkin@mojave-backup" retention="7B"/>
   <setup>
     <script path="/home/devilkin/bin/backup-ninja-script"/>
   </setup>
@@ -14,6 +14,7 @@
     <exclude glob="/home/*/.dvdcss"/>
     <exclude glob="/home/*/.fishsrv.pl"/>
     <exclude glob="/home/*/.fontconfig"/>
+    <exclude glob="/home/*/.gconf/apps/nautilus/desktop-metadata"/>
     <exclude glob="/home/*/.gnome2/epiphany/ephy-favicon-cache.xml"/>
     <exclude glob="/home/*/.gnome2/epiphany/mozilla/epiphany/Cache"/>
     <exclude glob="/home/*/.gnome2/goobox.d/cache"/>
@@ -29,19 +30,22 @@
     <exclude glob="/home/*/.macromedia/Flash_Player"/>
     <exclude glob="/home/*/.mozilla-thunderbird/*/ImapMail"/>
     <exclude glob="/home/*/.mozilla/firefox/*/Cache"/>
-    <exclude glob="/home/*/.nautilus"/>
     <exclude glob="/home/*/.pulse*"/>
     <exclude glob="/home/*/.sudo_as_admin_successful"/>
     <exclude glob="/home/*/.thumbnails"/>
     <exclude glob="/home/*/.xsession-errors"/>
+    <!--
     <exclude glob="/home/*/opt"/>
     <exclude glob="/home/*/tmp"/>
+    -->
     <exclude path="/etc/apt/apt.conf.d"/>
     <exclude glob="/etc/apt/*.gpg*"/>
     <include path="/home/devilkin"/>
     <include path="/etc/X11/xorg.conf"/>
     <include path="/etc/apt"/>
+    <include path="/etc/yum.repos.d"/>
     <include path="/etc/hosts"/>
     <include path="/etc/safekeep"/>
+    <include path="/opt"/>
   </data>
 </backup>
