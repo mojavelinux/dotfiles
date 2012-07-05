@@ -19,7 +19,8 @@ case "$DISTRO" in
         ;;
 esac
 
-PS1="[$USER_HOST_INFO:jdk\$JAVA_MAJOR_VERSION \W]\$ "
+
+PS1="[$USER_HOST_INFO:jdk\$(java_major_version) \W]\$ "
 #if [ "$TERM" = "xterm" ]; then
 #	TERM_TITLE="\[\033]0;\W\007\]"
 #	PS1=$TERM_TITLE$PS1
