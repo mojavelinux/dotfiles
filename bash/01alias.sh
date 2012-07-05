@@ -60,7 +60,9 @@ alias qivf='/usr/bin/qiv -ift'
 alias qivt='/usr/bin/qiv -pit'
 alias qivft='/usr/bin/qiv -pift'
 alias validate='xmllint --noout --valid'
+alias timestamp='date +%s'
 alias xterm="xterm -bg black -fg white"
+alias et="/usr/bin/time -f %e"
 alias evolution.shutdown="evolution --force-shutdown"
 alias wine.shutdown="killall wine-preloader"
 alias myip="/sbin/ifconfig | grep -o 'inet addr:[^ ]*' | sed 's/inet addr://' | grep -v '127.0.0.1'"
@@ -71,9 +73,15 @@ alias mdt='mvn dependency:tree | vim -'
 alias histup='history -r'
 alias links='elinks'
 alias aweserve='awestruct -d'
+alias a2html5="asciidoc -b html5 -a icons -a theme=default -a data-uri -a toc2 -a pygments"
+alias a2pdf="a2x -fpdf -dbook --fop --icons --icons-dir=$HOME/.asciidoc/themes/default/icons"
+alias a2docbook='a2x -fdocbook -dbook'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias format='astyle -n -U -a -j -f'
+function _run_clojure_repl() { java $JAVA_OPTS -cp /usr/share/java/jline.jar:/usr/share/java/clojure.jar jline.ConsoleRunner clojure.main -i $HOME/.clojure/init.clj -r "$@"; }
+alias clojurepl='_run_clojure_repl'
 
 function say() { espeak -a20 -p90 "$@" 2> /dev/null ; }
 
@@ -90,6 +98,7 @@ alias svncheck='svn merge --dry-run -r BASE:HEAD .'
 # swap Java version aliases
 # also see http://gist.github.com/23190
 # also see http://blog.emmanuelbernard.com/2011/01/script-to-hot-switch-jdk-versions-in-mac-os-x/
+function java_major_version() { $JAVA_HOME/bin/java -version 2>&1 | grep -o '1\.\([678]\)\.' | cut -d '.' -f2; }
 alias java6="export PATH=`echo $PATH | sed \"s;:$HOME/opt/java\(-[^/]*\)\?/bin;:/home/dallen/opt/java-6-openjdk/bin;\"`
 export JAVA_HOME=$HOME/opt/java-6-openjdk
 export JAVA_MAJOR_VERSION=6"
