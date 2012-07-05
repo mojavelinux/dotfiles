@@ -1,3 +1,5 @@
+#!/usr/bin/env xdg-open
+
 [Desktop Entry]
 Name=SlideRocket Player
 Name[en_US]=SlideRocket Player
@@ -6,7 +8,7 @@ GenericName=SlideRocket Player
 Exec='/opt'/'SlideRocket Player'/bin/'SlideRocket Player'
 Type=Application
 Terminal=false
-Icon=/home/dallen/.local/share/applications/sliderocket.png
+Icon=sliderocket
 StartupNotify=true
 X-KDE-StartupNotify=true
 Categories=Office;Viewer;Utility;
