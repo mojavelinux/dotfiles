@@ -7,8 +7,11 @@ fi
 
 FILE=$1
 FILE_BASENAME=${FILE%.pdf}
+FILE_OPTIMIZED_TMP=$FILE_BASENAME-optimized.pdf~
 FILE_OPTIMIZED=$FILE_BASENAME-optimized.pdf
 
-gs -sOutputFile=$FILE_OPTIMIZED -sDEVICE=pdfwrite -dCompatibilityLevel=1.6 $FILE < /dev/null
+gs -sOutputFile=$FILE_OPTIMIZED_TMP -sDEVICE=pdfwrite -dCompatibilityLevel=1.6 $FILE < /dev/null
+pdftk $FILE_OPTIMIZED_TMP cat output $FILE_OPTIMIZED
+rm -f $FILE_OPTIMIZED_TMP
 
 exit 0
