@@ -1,9 +1,6 @@
 <backup>
-  <host name="ideapad" user="sarah"/>
-  <repo path="/run/media/devilkin/tera/sarah@ideapad-backup" retention="7B"/>
-  <setup>
-    <script path="/home/sarah/bin/backup-ninja-script"/>
-  </setup>
+  <host name="berserkr" user="dallen"/>
+  <repo path="/run/media/devilkin/tera/dallen@berserkr-backup" retention="7B"/>
   <data exclude-devices="true" exclude-fifos="true" exclude-sockets="true">
     <exclude glob="/home/*/.adobe/Flash_Player"/>
     <exclude glob="/home/*/.adobe/Acrobat/*/*Cache*"/>
@@ -13,17 +10,22 @@
     <exclude glob="/home/*/.compiz"/>
     <exclude glob="/home/*/.compiz-1"/>
     <exclude glob="/home/*/.dbus"/>
+    <exclude glob="/home/*/.dropbox-dist"/>
     <exclude glob="/home/*/.dvdcss"/>
     <exclude glob="/home/*/.esd_auth"/>
     <exclude glob="/home/*/.evolution"/>
     <exclude glob="/home/*/.fishsrv.pl"/>
     <exclude glob="/home/*/.fontconfig"/>
+    <exclude glob="/home/*/.gem"/>
     <exclude glob="/home/*/.gksu.lock"/>
     <exclude glob="/home/*/.glassfishv3-*"/>
-    <exclude glob="/home/*/.gradle/cache"/>
+    <exclude glob="/home/*/.gnome2_private"/>
+    <exclude glob="/home/*/.gradle/caches"/>
     <exclude glob="/home/*/.groovy/grapes"/>
     <exclude glob="/home/*/.gstreamer-*"/>
     <exclude glob="/home/*/.gvfs"/>
+    <exclude glob="/home/*/.hardinfo"/>
+    <exclude glob="/home/*/.hplip"/>
     <exclude glob="/home/*/.ivy2"/>
     <exclude glob="/home/*/.java"/>
     <exclude glob="/home/*/.jnlp-applet"/>
@@ -39,21 +41,15 @@
     <exclude glob="/home/*/.nautilus/metafiles"/>
     <exclude glob="/home/*/.pulse*"/>
     <exclude glob="/home/*/.sudo_as_admin_successful"/>
+    <exclude glob="/home/*/.swt"/>
     <exclude glob="/home/*/.thumbnails"/>
     <exclude glob="/home/*/.thunderbird"/>
     <exclude glob="/home/*/.update-notifier"/>
     <exclude glob="/home/*/.webex"/>
-    <exclude glob="/home/*/.xsession-errors*"/>
+    <exclude glob="/home/*/.xsession-errors"/>
+    <exclude glob="/home/*/.xsession-errors.old"/>
+    <exclude glob="/home/*/Dropbox"/>
     <exclude glob="/home/*/PDF"/>
-	<!--
-    <exclude glob="/home/*/opt"/>
-    <exclude glob="/home/*/tmp"/>
-	-->
-    <include path="/home/sarah"/>
+    <include path="/home/dallen"/>
   </data>
-  <!--
-  restore command:
-  rdiff-backup -r 1s devilkin@mojave::/media/tera/sarah@ideapad-backup/ /
-  (change the target directory if you want to restore to a tmp location)
-  -->
 </backup>
