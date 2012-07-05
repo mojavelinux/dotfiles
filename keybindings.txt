@@ -23,14 +23,19 @@ Terminal:
 <Ctrl><Shift>Right : move tab right
 <Ctrl><Shift>v : paste
 
+Pidgin:
+Ctrl+Up / Ctrl+Down : Paginate through command history (usage: IRC NickServ and ChanServ commands)
+
 Gedit:
 <Ctrl>= : enlarge text
 <Ctrl>- : shrink text
 <Ctrl>0 : normal text
 
-Zoom:
-<Ctrl>wheel up : zoom in
-<Ctrl>wheel down : zoom out
+Zoom (in Gnome 3, Zoom must be enabled):
+<Ctrl>wheel up : zoom in (doesn't work in Gnome 3)
+<Ctrl>wheel down : zoom out (doesn't work in Gnome 3)
+<Super>= : zoom in
+<Super>- : zoom out
 
 Switcher:
 <Super>a : show all windows
