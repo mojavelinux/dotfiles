@@ -58,6 +58,11 @@ map - <C-X>
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
+" navigate files
+map gf :e <cfile><CR> :argadd %<CR>
+map gl :argdelete %<CR> :last<CR>
+map gL :Explore<CR>
+
 " check for color enabled terminal or gui
 if &t_Co > 2 || has("gui_running")
   syntax on                " turn on syntax highlighting
@@ -81,11 +86,13 @@ if has("autocmd")
 
   " For all html files set 'tabstop' to 2 characters.
   au FileType html setlocal ts=2
+  au FileType xml setlocal ep=xmllint\ --format\ -
   au BufRead,BufNewFile *.jspx setlocal ts=2 sw=2
   au BufRead *.jsp setlocal foldmarker=<%--,--%>
   au BufRead *.java setlocal foldmarker=/*\ ,*/
 
-  au BufRead,BufNewFile *.md setlocal syntax=markdown
+  au BufRead,BufNewFile *.md setfiletype markdown
+  au BufRead,BufNewFile *.asciidoc,*.adoc setfiletype asciidoc
 
   " Project-specific settings
 "  au BufRead,BufNewFile */mojarra-trunk*/* set et 
