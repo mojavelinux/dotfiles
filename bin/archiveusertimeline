@@ -1,8 +1,17 @@
 #!/usr/bin/env groovy
 
+/**
+ * This script grabs the user's latest tweets and appends them to an XML file
+ * in the current user's home directory. The script reads the oauth credentials
+ * from the supplied configuration file.
+ */
+
+@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.2')
 import groovyx.net.http.RESTClient
 import groovy.xml.MarkupBuilder
+@Grab(group='commons-lang', module='commons-lang', version='2.4')
 import org.apache.commons.lang.StringEscapeUtils
+@Grab(group='org.scribe', module='scribe', version='1.3.0')
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.Verifier;
@@ -163,7 +172,7 @@ xml.statuses(type:"array") {
          id(e.id.text())
          status_number(statusNumber--)
          text(StringEscapeUtils.unescapeXml(e.text.text()))
-         link(TWITTER_API_URL + "/#!/" + u + "/status/" + e.id.text())
+         link(TWITTER_API_URL + "/" + u + "/status/" + e.id.text())
          source(e.source.text())
          truncated(e.truncated.text())
          in_reply_to_status_id(e.in_reply_to_status_id.text())
@@ -174,7 +183,7 @@ xml.statuses(type:"array") {
                created_at(e.retweeted_status.created_at.text())
                id(e.retweeted_status.id.text())
                text(StringEscapeUtils.unescapeXml(e.retweeted_status.text.text()))
-               link(TWITTER_API_URL + "/#!/" + e.retweeted_status.user.screen_name + "/status/" + e.retweeted_status.id.text())
+               link(TWITTER_API_URL + "/" + e.retweeted_status.user.screen_name + "/status/" + e.retweeted_status.id.text())
                source(e.retweeted_status.source.text())
                truncated(e.retweeted_status.truncated.text())
                in_reply_to_status_id(e.retweeted_status.in_reply_to_status_id.text())
@@ -206,7 +215,7 @@ xml.statuses(type:"array") {
             id(e.id.text())
             status_number(statusNumber--)
             text(e.text.text())
-            link(TWITTER_API_URL + "/#!/" + u + "/status/" + e.id.text())
+            link(TWITTER_API_URL + "/" + u + "/status/" + e.id.text())
             source(e.source.text())
             truncated(e.truncated.text())
             in_reply_to_status_id(e.in_reply_to_status_id.text())
