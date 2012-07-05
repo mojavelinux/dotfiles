@@ -6,6 +6,7 @@ export TMPDIR=/tmp/$USER
 mkdir -p $TMPDIR
 export VISUAL=`which vim`
 export EDITOR=`which vim`
+export PAGER='less -R'
 #export CDPATH=~/projects
 
 # make the xmllint indent with tabs (yes, that is a TAB)
