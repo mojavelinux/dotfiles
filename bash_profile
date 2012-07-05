@@ -1,6 +1,7 @@
 # ~/.bash_profile: executed by bash(1) for login shells.
 
-#keychain id_rsa 2>/dev/null
+# activate ssh-agent for id_rsa key
+keychain -q id_rsa && source ~/.keychain/$HOSTNAME-sh
 
 if [ -n "$BASH_VERSION" ] && [ -f ~/.bashrc ]; then
     . ~/.bashrc
@@ -29,9 +30,10 @@ pathmunge $ANDROID_HOME/tools
 pathmunge $GRADLE_HOME/bin
 pathmunge $GLASSFISH_HOME/bin
 pathmunge $FORGE_HOME/bin
-pathmunge $PYTHON_EXT_HOME/bin
+#pathmunge $PYTHON_EXT_HOME/bin
 pathmunge $GEM_HOME/bin
 pathmunge $JRUBY_HOME/bin
+pathmunge $JYTHON_HOME/bin
 #pathmunge $MOZILLA_FIVE_HOME
 pathmunge $HOME/opt/b-folders
 if [ -d ~/bin ] ; then
