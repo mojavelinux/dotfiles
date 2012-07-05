@@ -1,7 +1,14 @@
 #!/usr/bin/env groovy
 
+/**
+ * This script grabs the latest matching tweets and appends them to an XML file
+ * in the current user's home directory.
+ */
+
+@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.2')
 import groovyx.net.http.RESTClient
 import groovy.xml.MarkupBuilder
+@Grab(group='commons-lang', module='commons-lang', version='2.4')
 import org.apache.commons.lang.StringEscapeUtils
 
 def cli = new CliBuilder(usage: "archivetweets [OPTION]")
@@ -51,7 +58,9 @@ def res = rest.get(
    path : '/search.atom', 
    query : params)
 
-def timeline = new XmlSlurper().parse(res.data)
+// at some point, we started getting the XML object back
+//def timeline = new XmlSlurper().parse(res.data)
+def timeline = res.data
 
 def writer = new FileWriter(f)
 //def writer = new StringWriter()
