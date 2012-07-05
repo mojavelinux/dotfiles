@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+   echo "Please supply a PDF file to flip"
+   exit 1
+fi
+
+FILE=$1
+FILE_BASENAME=${FILE%.pdf}
+FILE_FLIPPED=$FILE_BASENAME-flipped.pdf
+
+pdftk $FILE cat 1-endS output $FILE_FLIPPED
+
+exit 0
