@@ -2,6 +2,7 @@
 
 // Similar capability provided by mvnhack: http://code.google.com/p/werkzeugkasten/wiki/mvnhack
 // Similar capability provided by (dependency:get): http://maven.apache.org/plugins/maven-dependency-plugin/get-mojo.html
+// mvn dependency:get -DrepoUrl= [url] -Dartifact=[group]:[artifact]:[version]
 
 def artifactId = null
 def groupId = null
