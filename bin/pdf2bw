@@ -7,8 +7,11 @@ fi
 
 FILE=$1
 FILE_BASENAME=${FILE%.pdf}
+FILE_BW_TMP=$FILE_BASENAME-bw.pdf~
 FILE_BW=$FILE_BASENAME-bw.pdf
 
-gs -sOutputFile=$FILE_BW -sDEVICE=pdfwrite -sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray -dCompatibilityLevel=1.6 $FILE < /dev/null
+gs -sOutputFile=$FILE_BW_TMP -sDEVICE=pdfwrite -sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray -dCompatibilityLevel=1.6 $FILE < /dev/null
+pdftk $FILE_BW_TMP cat output $FILE_BW
+rm -f $FILE_BW_TMP
 
 exit 0
