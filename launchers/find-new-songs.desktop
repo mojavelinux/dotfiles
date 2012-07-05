@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Icon[en_US]=folder-music
+Name[en_US]=Find New Songs
+Exec=gnome-search-tool --path /home/devilkin/media/music --regex ".(mp3|ogg)$" --mtimeless=60 --sortby date --start
+Comment[en_US]=Search for songs less than 60 days old
+Name=Find New Songs
+Comment=Search for songs less than 30 days old
+Icon=folder-music
