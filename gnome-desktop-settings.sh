@@ -3,6 +3,8 @@
 # This script will initialize my personal desktop preferences on a fresh
 # or existing installation of Linux running Gnome 3.
 
+# Default values can be found in the schema files in /usr/share/glib-2.0/schemas
+
 gsettings set org.gnome.settings-daemon.peripherals.keyboard delay 250
 gsettings set org.gnome.settings-daemon.peripherals.keyboard repeat-interval 30
 gsettings set org.gnome.settings-daemon.peripherals.mouse locate-pointer true
@@ -17,6 +19,14 @@ gsettings set org.gnome.settings-daemon.plugins.updates auto-update-type securit
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim-battery false
 gsettings set org.gnome.settings-daemon.plugins.power sleep-display-ac 1800
 gsettings set org.gnome.settings-daemon.plugins.power sleep-display-battery 1800
+gsettings set org.gnome.settings-daemon.plugins.power percentage-action -1
+gsettings set org.gnome.settings-daemon.plugins.power percentage-critical -1
+gsettings set org.gnome.settings-daemon.plugins.power percentage-low -1
+gsettings set org.gnome.settings-daemon.plugins.power time-action 120
+gsettings set org.gnome.settings-daemon.plugins.power time-critical 300
+gsettings set org.gnome.settings-daemon.plugins.power time-low 600
+gsettings set org.gnome.settings-daemon.plugins.power use-time-for-policy true
+gsettings set org.gnome.settings-daemon.plugins.power critical-battery-action interactive
 gsettings set org.gnome.GPaste max-displayed-history-size 19
 gsettings set org.gnome.GPaste max-history-size 100
 gsettings set org.gnome.GPaste primary-to-history true
@@ -41,7 +51,7 @@ gsettings set org.gnome.gedit.preferences.editor bracket-matching true
 gsettings set org.gnome.gedit.preferences.editor right-margin-position 120
 gsettings set org.gnome.gedit.preferences.ui statusbar-visible true
 gsettings set org.gnome.gedit.preferences.ui notebook-show-tabs-mode always
-gsettings set org.gnome.libgnomekbd.keyboard "['ctrl\tctrl:nocaps']"
+gsettings set org.gnome.libgnomekbd.keyboard options "['ctrl\tctrl:nocaps']"
 gsettings set org.gnome.shell.clock show-date true
 gsettings set org.gnome.nautilus.preferences click-policy single
 gsettings set org.gnome.nautilus.preferences enable-delete true
