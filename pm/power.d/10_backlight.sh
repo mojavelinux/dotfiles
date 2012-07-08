@@ -11,7 +11,7 @@ if [ -f /sys/class/backlight/acpi_video0/max_brightness ]; then
     MAX_LCD_BRIGHTNESS=`cat /sys/class/backlight/acpi_video0/max_brightness`
 fi
 
-if [ -f cat /sys/class/leds/smc\:\:kbd_backlight/max_brightness ]; then
+if [ -f /sys/class/leds/smc\:\:kbd_backlight/max_brightness ]; then
     KBD=1
     MAX_KBD_BRIGHTNESS=`cat /sys/class/leds/smc\:\:kbd_backlight/max_brightness`
 fi
