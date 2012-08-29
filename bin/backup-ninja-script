@@ -6,8 +6,14 @@ if [ -z "$1" ] || [ "$2" == "POST-SETUP" ]; then
   PACKAGES_FILE=$HOME/config/system/current/$RELEASE_ID-package-list.txt
   PACKAGES_BY_SIZE_FILE=$HOME/config/system/current/$RELEASE_ID-package-list-by-size.txt
   SETTINGS_FILE=$HOME/config/system/current/gsettings.txt
+  CRONTAB_FILE=$HOME/config/system/current/crontab
+
+  if `crontab -l 2>/dev/null`; then
+    crontab -l > $CRONTAB_FILE
+  fi
 
   case "$DISTRO" in
+
     Fedora*)
       rpm -qa --qf "%{NAME}\t%{VERSION}-%{RELEASE}\t%{INSTALLTIME:date}\n" | sort > $PACKAGES_FILE
       rpm -qa --qf '%10{SIZE} %{NAME}\n' | sort -n -r > $PACKAGES_BY_SIZE_FILE
