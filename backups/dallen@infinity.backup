@@ -1,0 +1,53 @@
+<backup>
+  <host name=""/>
+  <repo path="/run/media/dallen/tera/dallen@infinity-backup" retention="7B"/>
+  <setup>
+    <script path="/home/dallen/bin/backup-ninja-script"/>
+  </setup>
+  <data exclude-devices="true" exclude-fifos="true" exclude-sockets="true">
+    <!-- TODO .IntelliJIdea* is hoarding space -->
+    <!-- TODO .eclipse* is hoarding space -->
+    <exclude glob="/home/*/.AsciidocFX-*"/>
+    <exclude glob="/home/*/.adobe"/>
+    <exclude glob="/home/*/.audacity-data"/>
+    <exclude glob="/home/*/.bundle"/>
+    <exclude glob="/home/*/.cache"/>
+    <exclude glob="/home/*/.dbus"/>
+    <exclude glob="/home/*/.dropbox*"/>
+    <exclude glob="/home/*/.esd_auth"/>
+    <exclude glob="/home/*/.gem/specs"/>
+    <exclude glob="/home/*/.gradle"/>
+    <exclude glob="/home/*/.gstreamer-*"/>
+    <exclude glob="/home/*/.icedtea"/>
+    <exclude glob="/home/*/.ivy2"/>
+    <exclude glob="/home/*/.java"/>
+    <exclude glob="/home/*/.jnlp-applet"/>
+    <exclude glob="/home/*/.kde/cache-*"/>
+    <exclude glob="/home/*/.kde/socket-*"/>
+    <exclude glob="/home/*/.kde/tmp-*"/>
+    <exclude glob="/home/*/.lein"/>
+    <exclude glob="/home/*/.local/share/Trash"/>
+    <exclude glob="/home/*/.m2/repository"/>
+    <exclude glob="/home/*/.npm/cache"/>
+    <exclude glob="/home/*/.opera"/>
+    <exclude glob="/home/*/.macromedia"/>
+    <exclude glob="/home/*/.nautilus/metafiles"/>
+    <exclude glob="/home/*/.rbx"/>
+    <exclude glob="/home/*/.rvm"/>
+    <exclude glob="/home/*/.sbt"/>
+    <exclude glob="/home/*/.sudo_as_admin_successful"/>
+    <exclude glob="/home/*/.thumbnails"/>
+    <exclude glob="/home/*/.xsession-errors*"/>
+    <exclude glob="/home/*/demos/**/target"/>
+    <exclude glob="/home/*/projects/**/.bundle/gems"/>
+    <exclude glob="/home/*/projects/**/target"/>
+    <exclude glob="/home/*/projects/**/node_modules"/>
+    <exclude glob="/home/*/machines"/>
+    <!--
+    <exclude glob="/home/*/mirror/checkout"/>
+    -->
+    <exclude glob="/home/*/mirror/ides"/>
+    <exclude glob="/home/*/tmp/**/node_modules"/>
+    <include path="/home/dallen"/>
+  </data>
+</backup>
