@@ -16,10 +16,34 @@ set show-all-if-ambiguous on
 #set editing mode emacs
 
 # Ignore case when doing completions
-#set completion-ignore-case on
+set completion-ignore-case on
 
 # Scroll long command lines
 #set horizontal-scroll-mode off
 
 # Do not beep on tab-completion
 set bell-style none
+
+# Disable echo of ^C after Ctrl+C is pressed
+set echo-control-characters off
+
+# <Alt>-s
+"\es":"\C-asudo \C-e\C-m"
+
+# <Ctrl>-R
+"\C-r": reverse-search-history
+
+# <Alt>-R
+"\er": forward-search-history
+
+# <Ctrl>-J
+"\C-j": menu-complete-backward
+
+# <Ctrl>-K
+"\C-k": menu-complete
+
+# <PageUp>
+"\e[5~": beginning-of-history
+
+# <PageDown>
+"\e[6~": end-of-history
