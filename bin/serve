@@ -1,0 +1,12 @@
+#!/bin/sh
+
+port=8000
+if [ ! -z "$1" ]; then
+  port=$1
+fi
+
+# Python
+python3 -m http.server
+
+# Ruby
+#ruby -run -e httpd . -p $port
