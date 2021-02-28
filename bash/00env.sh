@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Increase process limit
+ulimit -u 4096
+
 # setup shell environment variables
 
 export TMPDIR=/tmp/$USER
