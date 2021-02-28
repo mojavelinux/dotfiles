@@ -8,7 +8,7 @@ if [ -z "$1" ] || [ "$2" == "POST-SETUP" ]; then
   SETTINGS_FILE=$HOME/config/system/current/gsettings.txt
   CRONTAB_FILE=$HOME/config/system/current/crontab
 
-  if `crontab -l 2>/dev/null`; then
+  if [ -n "`crontab -l 2>/dev/null`" ]; then
     crontab -l > $CRONTAB_FILE
   fi
 
@@ -17,7 +17,7 @@ if [ -z "$1" ] || [ "$2" == "POST-SETUP" ]; then
     Fedora*)
       rpm -qa --qf "%{NAME}\t%{VERSION}-%{RELEASE}\t%{INSTALLTIME:date}\n" | sort > $PACKAGES_FILE
       rpm -qa --qf '%10{SIZE} %{NAME}\n' | sort -n -r > $PACKAGES_BY_SIZE_FILE
-      gsettings list-recursively > $SETTINGS_FILE
+      gsettings list-recursively | sort > $SETTINGS_FILE
       ;;
     Ubuntu*)
 	  dpkg --get-selections | grep "[[:space:]]install$" | sed 's/\t\+install//' > $PACKAGES_FILE
