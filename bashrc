@@ -1,36 +1,28 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# ~/.bashrc - executed by bash(1) for non-login shells
 
 # Skip if not running an interactive prompt and this isn't an Xsession start
 [ -z "$PS1" ] && return
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+  . /etc/bashrc
 fi
 
-# enable programmable completion features
-if [ -z "$BASH_COMPLETION" -a -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
-
-# Execute all scripts in ~/.bash directory
+# Execute all indexed scripts in ~/.bash.d
 for i in ~/.bash.d/[0-9][0-9]*.sh; do
-    if [ -x "$i" ]; then
-        . $i
-    fi
+  if [ -x "$i" ]; then
+    . $i
+  fi
 done
-
-# TODO move to .bash.d/01alias.sh
-expelpath() {
-    if echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
-        export PATH=`echo $PATH | sed  "s;\(^\|:\)$1\($\|:\);\1;"`
-    fi
-}
 
 unset i
 
-#[[ -s $HOME/.travis/travis.sh ]] && source $HOME/.travis/travis.sh
-#[[ -s $HOME/.sdkman/bin/sdkman-init.sh ]] && source $HOME/.sdkman/bin/sdkman-init.sh
-#[[ -s $HOME/.jenv/bin/jenv ]] && eval "$($HOME/.jenv/bin/jenv init -)"
-#[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm && rvm use system > /dev/null
-#[[ -s $HOME/.nvm/nvm.sh ]] && source $HOME/.nvm/nvm.sh
+export NVM_DIR=$HOME/.nvm
+[[ -s $NVM_DIR/nvm.sh ]] && source $NVM_DIR/nvm.sh
+[[ -s $NVM_DIR/bash_completion ]] && source $NVM_DIR/bash_completion
+
+export RVM_DIR=$HOME/.rvm
+[[ -s $RVM_DIR/scripts/rvm ]] && source $RVM_DIR/scripts/rvm && rvm use system > /dev/null
+
+export SDKMAN_DIR=$HOME/.sdkman
+[[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
