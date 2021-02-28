@@ -14,8 +14,8 @@ export PAGER='less -R'
 
 # make the xmllint indent with tabs (yes, that is a TAB)
 #export XMLLINT_INDENT="	"
-# actually, 3 spaces now :)
-export XMLLINT_INDENT="   "
+# actually, 4 spaces now :)
+export XMLLINT_INDENT="    "
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignorespace:ignoredups
@@ -41,3 +41,5 @@ export FIGNORE=.git:.svn:CVS
 shopt -s checkwinsize
 
 #export SUDO_PROMPT="[sudo] password for `whoami`: "
+
+export XML_CATALOG_FILES='/etc/xml/catalog /usr/share/sgml/w3c-markup-validator/catalog.xml'
