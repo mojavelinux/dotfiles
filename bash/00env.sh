@@ -12,10 +12,8 @@ export EDITOR=`which vim`
 export PAGER='less -R'
 #export CDPATH=~/projects
 
-# make the xmllint indent with tabs (yes, that is a TAB)
-#export XMLLINT_INDENT="	"
-# actually, 4 spaces now :)
-export XMLLINT_INDENT="    "
+# make the xmllint indent with 2 spaces
+export XMLLINT_INDENT="  "
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignorespace:ignoredups
