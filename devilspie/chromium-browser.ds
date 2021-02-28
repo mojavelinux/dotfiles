@@ -1,8 +1,0 @@
-; http://www.foosel.org/linux/devilspie
-(if
-  (is (window_class) "Chromium-browser")
-  (begin
-    (set_workspace 1)
-    (focus)
-  )
-)
