@@ -21,15 +21,10 @@ export HISTCONTROL=ignorespace:ignoredups
 #export HISTCONTROL=erasedups
 export HISTIGNORE="pwd:ls:history:reload"
 
-shopt -s histappend
 # append each command to the history file immediately (rather than waiting until the end of your shell session to update it: http://pavlovich.org/musings/?p=6 
-PROMPT_COMMAND="history -a"
-#PROMPT_COMMAND="history -a;history -n"
-#if [ -z "$PROMPT_COMMAND" ]; then
-#   PROMPT_COMMAND="history -a"
-#else
-#   PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
-#fi
+shopt -s histappend
+# NOTE PROMPT_COMMAND is used by Gnome Terminal to set the tab/window title
+. /etc/profile.d/vte.sh
 
 # ignore RCS directories when doing completions
 #export FIGNORE=.git:.svn:CVS
