@@ -4,6 +4,9 @@ Fn+Delete : real delete
 Fn+Up : Page Up
 Fn+Down : Page Down
 
+Universal:
+<Ctrl><Shift>u : enter a unicode sequence
+
 Session:
 <Super>l : lock screen
 <Super>End : power down options
@@ -21,7 +24,16 @@ Terminal:
 <Shift>Right : switch to tab to the right
 <Ctrl><Shift>Left : move tab left
 <Ctrl><Shift>Right : move tab right
-<Ctrl><Shift>v : paste
+<Ctrl><Shift>p : paste
+
+Bash:
+<Ctrl><Alt>e : expand command alias
+<Ctrl>r : reverse incremental history search
+<Alt>r : forward incremental history search (broken)
+<Ctrl>p : previous in history
+<Ctrl>n : next in history
+<Ctrl>x<Ctrl>e : edit the commandline
+<Alt>s : execute command using sudo
 
 Pidgin:
 Ctrl+Up / Ctrl+Down : Paginate through command history (usage: IRC NickServ and ChanServ commands)
