@@ -1,4 +1,4 @@
-# ~/.inputrc: readline customizations (man readline)
+# ~/.inputrc - readline customizations (man readline)
 
 # Tilde expansion is done when processing completions
 #set expand-tilde on
@@ -25,25 +25,16 @@ set completion-ignore-case on
 set bell-style none
 
 # Disable echo of ^C after Ctrl+C is pressed
-set echo-control-characters off
+#set echo-control-characters off
 
-# <Alt>-s
-"\es":"\C-asudo \C-e\C-m"
+## <Ctrl>-R
+#"\C-r": reverse-search-history
+#
+## <Alt>-R
+#"\er": forward-search-history
 
-# <Ctrl>-R
-"\C-r": reverse-search-history
+# <Alt>-<Up>
+"\e[1;3A": beginning-of-history
 
-# <Alt>-R
-"\er": forward-search-history
-
-# <Ctrl>-J
-"\C-j": menu-complete-backward
-
-# <Ctrl>-K
-"\C-k": menu-complete
-
-# <PageUp>
-"\e[5~": beginning-of-history
-
-# <PageDown>
-"\e[6~": end-of-history
+# <Alt>-<Down>
+"\e[1;3B": end-of-history
