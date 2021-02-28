@@ -1,6 +1,6 @@
 <backup>
-  <host name="tuxbookpro" user="dallen"/>
-  <repo path="/run/media/devilkin/tera/dallen@tuxbookpro-backup" retention="7B"/>
+  <host name=""/>
+  <repo path="/run/media/dallen/tera/dallen@tuxbook-backup" retention="7B"/>
   <setup>
     <script path="/home/dallen/bin/backup-ninja-script"/>
   </setup>
@@ -8,29 +8,26 @@
     <!-- .IntelliJIdea* is hoarding space -->
     <!-- .eclipse* is hoarding space -->
     <exclude glob="/home/*/demos/**/target"/>
-    <exclude glob="/home/*/PDF"/>
     <exclude glob="/home/*/projects*/**/target"/>
-    <exclude glob="/home/*/machines"/>
+    <exclude glob="/home/*/machines"/> <!-- manual transfer -->
+    <exclude glob="/home/*/mount"/>
     <!--
     <exclude glob="/home/*/mirror"/>
     -->
-    <exclude glob="/home/*/.adobe/Flash_Player"/>
-    <exclude glob="/home/*/.adobe/Acrobat/*/*Cache*"/>
-    <exclude glob="/home/*/.appdata"/>
-    <exclude glob="/home/*/.audacity*"/>
+    <exclude glob="/home/*/.adobe"/>
+    <exclude glob="/home/*/.audacity-data"/>
     <exclude glob="/home/*/.cache"/>
-    <exclude glob="/home/*/.compiz"/>
     <exclude glob="/home/*/.dbus"/>
+    <exclude glob="/home/*/.dropbox-dist"/>
     <exclude glob="/home/*/.dvdcss"/>
     <exclude glob="/home/*/.elluminate"/>
     <exclude glob="/home/*/.esd_auth"/>
     <exclude glob="/home/*/.fishsrv.pl"/>
     <exclude glob="/home/*/.fontconfig"/>
-    <exclude glob="/home/*/.gegl-*"/>
     <exclude glob="/home/*/.gem"/>
     <exclude glob="/home/*/.gksu.lock"/>
     <exclude glob="/home/*/.glassfishv3-*"/>
-    <exclude glob="/home/*/.gradle/cache"/>
+    <exclude glob="/home/*/.gradle"/>
     <exclude glob="/home/*/.groovy/grapes"/>
     <exclude glob="/home/*/.gstreamer-*"/>
     <exclude glob="/home/*/.gvfs"/>
@@ -38,6 +35,9 @@
     <exclude glob="/home/*/.ivy2"/>
     <exclude glob="/home/*/.java"/>
     <exclude glob="/home/*/.jnlp-applet"/>
+    <exclude glob="/home/*/.kde/cache-*"/>
+    <exclude glob="/home/*/.kde/socket-*"/>
+    <exclude glob="/home/*/.kde/tmp-*"/>
     <exclude glob="/home/*/.local/share/Trash"/>
     <exclude glob="/home/*/.m2/repository"/>
     <exclude glob="/home/*/.opera/cache"/>
@@ -48,11 +48,11 @@
     <exclude glob="/home/*/.mozilla/firefox/*/Cache"/>
     <exclude glob="/home/*/.nautilus/metafiles"/>
     <exclude glob="/home/*/.pulse*"/>
+    <exclude glob="/home/*/.rbx"/>
+    <exclude glob="/home/*/.rvm"/> <!-- manual transfer -->
     <exclude glob="/home/*/.sudo_as_admin_successful"/>
     <exclude glob="/home/*/.thumbnails"/>
-    <!--
     <exclude glob="/home/*/.thunderbird/*/ImapMail"/>
-    -->
     <exclude glob="/home/*/.webex"/>
     <exclude glob="/home/*/.xsession-errors*"/>
     <include path="/home/dallen"/>
