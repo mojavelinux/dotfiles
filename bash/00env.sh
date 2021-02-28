@@ -34,7 +34,8 @@ PROMPT_COMMAND="history -a"
 #fi
 
 # ignore RCS directories when doing completions
-export FIGNORE=.git:.svn:CVS
+#export FIGNORE=.git:.svn:CVS
+export FIGNORE=.svn:CVS
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
