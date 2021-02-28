@@ -109,7 +109,8 @@ gconftool-2 --type string --set /apps/gnome-terminal/keybindings/prev_tab "<Shif
 gconftool-2 --type string --set /apps/gnome-terminal/keybindings/move_tab_right "<Shift><Control>Right"
 gconftool-2 --type string --set /apps/gnome-terminal/keybindings/move_tab_left "<Shift><Control>Left"
 gconftool-2 --type string --set /apps/gnome-terminal/keybindings/new_tab "<Control>t"
-gconftool-2 --type string --set /apps/gnome-terminal/keybindings/zoom_in "<Ctrl>equal"
+gconftool-2 --type string --set /apps/gnome-terminal/keybindings/zoom_in "<Control>equal"
+gconftool-2 --type string --set /apps/gnome-terminal/keybindings/paste "<Shift><Control>p"
 
 # Power settings
 gconftool-2 --type string --set /apps/gnome-power-manager/actions/critical_battery "suspend"
