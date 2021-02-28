@@ -28,10 +28,11 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
 endif
 
 set nocompatible        " This must be first, because it changes other options as a side effect
-set viminfo='20,\"50    " read/write a .viminfo file, don't store > 50 lines
+set nojoinspaces        " Don't double space paragraphs when wrapping.
+set viminfo='100,<50,s10,h,n~/.vim/.viminfo
 set history=50          " keep 50 lines of command line history
 set dir=~/.vim/tmp//    " directory where the swap file is stored (trailing double slash enables full-qualified file name)
-set bdir=~/.vim/tmp     " directory where the backup file is temporarily stored (I don't use backup files)
+"set bdir=~/.vim/tmp     " directory where the backup file is temporarily stored (I don't use backup files)
 set nobackup            " do not keep a backup file, use versions instead
 "set nofixeol            " do not add an endline to the end of the file
 set sc                  " Show partial command in lower-right corner
@@ -45,7 +46,6 @@ set incsearch           " do incremental searching
 set et                  " expands tabs to spaces
 set sw=4                " number of spaces to use for each step of indent
 set ts=4                " number of columns a tab will span
-"set background=dark     " setup colors for a dark background
 set modeline            " allow commands from file to be executed
 set wildmenu            " tab expansion leads to an inline menu of possible selections
 set virtualedit=block,insert
@@ -60,12 +60,22 @@ let g:netrw_silent=1
 "set lazyredraw
 let mapleader="\\"
 let maplocalleader="\\"
-let vimclojure#ParenRainbow=1
-"let vimclojure#WantNailgun = 1
-"let vimclojure#NailgunClient = $HOME . "/.vim/lib/nailgun-client/ng"
-"let vimclojure#NailgunClient = "/usr/bin/ng"
-let g:ruby_path=system('which --skip-tilde ruby')  " force Vim to use Ruby even when `which ruby` resolves to JRuby
-let g:goyo_width=100
+let g:ruby_path=system('which --skip-tilde ruby')  " force Vim to use system Ruby even when `which ruby` resolves to JRuby
+
+" plugins managed by plug (see https://github.com/junegunn/vim-plug#usage)
+call plug#begin()
+Plug 'slim-template/vim-slim' " support for slim-lang files
+Plug 'mustache/vim-mustache-handlebars' " support for mustache and handlebars files
+Plug 'adelarsq/vim-matchit' " advanced % matching
+Plug 'junegunn/goyo.vim' " distraction-free writing
+Plug 'majutsushi/tagbar' " ctags sidebar
+Plug 'digitaltoad/vim-pug' " support for pug template files
+Plug 'tpope/vim-commentary' " comment stuff out using gc
+Plug 'mojavelinux/vim-voom-plugin', { 'branch': 'improved' } " outline mode
+call plug#end()
+
+"let g:goyo_width=100
+map <Leader>f :Goyo <bar> highlight StatusLineNC ctermfg=white<CR>
 
 "show man page in split
 let $GROFF_NO_SGR=1
@@ -77,9 +87,8 @@ nmap K :Man <cword><CR>
 "inoremap <Leader><Leader> <Leader>
 imap <Leader>da Dan Allen
 imap <Leader>sw Sarah White
-imap <Leader>rh Red Hat
 imap <Leader>arq Arquillian
-imap <Leader>amd Asciidoctor
+imap <Leader>adr Asciidoctor
 imap <Leader>ad AsciiDoc
 
 " jump between brackets using tab
@@ -137,35 +146,35 @@ map gl :argdelete %<CR> :last<CR>
 map gL :Explore<CR>
 
 " tagbar config
-" TODO use custom ctags file so doesn't conflict with other uses of ctags
-let g:tagbar_sort = 0
-let g:tagbar_compact = 1
+let g:tagbar_sort=0
+let g:tagbar_compact=1
 nnoremap <silent> <F9> :TagbarToggle<CR>
-nnoremap <silent> <Leader>] :TagbarToggle<CR>
-"let g:tagbar_type_asciidoc = {
-"  \ 'ctagstype' : 'asciidoc',
-"  \ 'kinds' : [
-"    \ 's:Table of Contents',
-"  \ ],
-"  \ 'sort' : 0,
-"\ }
-"  "\ 'sro' : '',
-"  "\ 'kind2scope' : {
-"  "  \ 's' : 'section'
-"  "\ },
-"  "\ 'scope2kind' : {
-"  "  \ 'section' : 's'
-"  "\ },
-let g:tagbar_width = 42
+"nnoremap <silent> <Leader>] :TagbarToggle<CR>
+"" TODO use custom ctags file so doesn't conflict with other uses of ctags
+""let g:tagbar_type_asciidoc = {
+""  \ 'ctagstype' : 'asciidoc',
+""  \ 'kinds' : [
+""    \ 's:Table of Contents',
+""  \ ],
+""  \ 'sort' : 0,
+""\ }
+""  "\ 'sro' : '',
+""  "\ 'kind2scope' : {
+""  "  \ 's' : 'section'
+""  "\ },
+""  "\ 'scope2kind' : {
+""  "  \ 'section' : 's'
+""  "\ },
+"let g:tagbar_width=42
 
 " voom config
-let g:voom_default_mode = 'asciidoc'
-let g:voom_tree_placement = 'right'
-let g:voom_tree_width = 42
-nnoremap <Leader>t :VoomToggle<CR>
+let g:voom_default_mode="asciidoc"
+let g:voom_tree_placement="right"
+let g:voom_tree_width=42
+nnoremap <Leader>v :VoomToggle<CR>
 
 " NERDTree config
-nnoremap <Leader>f :NERDTree<CR>
+"nnoremap <Leader>f :NERDTree<CR>
 
 " check for color enabled terminal or gui
 if &t_Co > 2 || has("gui_running")
@@ -185,7 +194,6 @@ endif
 
 if &diff
   syntax off
-  set background=dark
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -195,6 +203,12 @@ if has("autocmd")
 
   " don't use the indent plugin
   filetype indent off
+
+  augroup noincsearch_when_substituting
+    au!
+    au CmdlineEnter : :set noincsearch
+    au CmdlineLeave : :set incsearch
+  augroup END
 
   au BufNewFile,BufRead *.txt setf text
 
@@ -206,14 +220,17 @@ if has("autocmd")
   au FileType text setlocal tw=0 linebreak "columns=120
 
   " For all html files set 'tabstop' to 2 characters.
-  au FileType html setlocal ts=2
+  au FileType ruby setlocal ts=2 sw=2
+  au FileType html setlocal ts=2 sw=2
   au FileType xml setlocal ep=xmllint\ --format\ -
   au BufRead,BufNewFile *.jspx setlocal ts=2 sw=2
   au BufRead *.jsp setlocal foldmarker=<%--,--%>
   au BufRead *.java setlocal foldmarker=/*\ ,*/
+  au BufRead *.hbs setlocal nofen syntax=html
   au BufRead,BufNewFile *.opalerb setlocal filetype=eruby
   "au BufRead,BufNewFile *.{asc{,iidoc},ad{,oc}} setlocal filetype=asciidoc linebreak showbreak=>\|
   au BufRead,BufNewFile *.{asc{,iidoc},ad{,oc}} setlocal filetype=asciidoc linebreak showbreak=↳\ 
+  au BufNewFile,BufRead *.json.hbs set filetype=handlebars
 
   au FileType asciidoc setlocal spell spelllang=en_us spell! commentstring=//\ %s
 
@@ -305,11 +322,12 @@ if has("autocmd")
   "\ imap <buffer> <Leader><Enter> <C-o>$<CR><CR>|
 
   au BufRead,BufNewFile *.appl setfiletype yaml
+  au BufRead,BufNewFile Jenkinsfile setfiletype groovy
 
   " Project-specific settings
-"  au BufRead,BufNewFile */arquillian/* set et ts=3 sw=3
-"  au BufRead,BufNewFile */mojarra-trunk*/* set et
-"  au BufRead,BufNewFile */seam-*/* set et ts=4 sw=3
+  "au BufRead,BufNewFile */arquillian/* set et ts=3 sw=3
+  "au BufRead,BufNewFile */mojarra-trunk*/* set et
+  "au BufRead,BufNewFile */seam-*/* set et ts=4 sw=3
 
   "au Filetype html,xml,xhtml,xsl source ~/.vim/scripts/closetag.vim
 
@@ -320,29 +338,17 @@ if has("autocmd")
   au BufReadPost,BufNewFile * set fo=crqljn
 
   " use template for new files based on type (always leaves a blank line at bottom)
-  au BufNewFile *.html 0r ~/.vim/skel.html
-  au BufNewFile *.xhtml 0r ~/.vim/skel.xhtml
-  au BufNewFile *.svg 0r ~/.vim/skel.svg
-  au BufNewFile *.java 0r ~/.vim/skel.java
-  au BufNewFile *.page.xml 0r ~/.vim/skel.page.xml
-  au BufNewFile pom.xml 0r ~/.vim/skel.pom.xml
+  "au BufNewFile *.html 0r ~/.vim/skel.html
+  "au BufNewFile *.xhtml 0r ~/.vim/skel.xhtml
+  "au BufNewFile *.svg 0r ~/.vim/skel.svg
+  "au BufNewFile *.java 0r ~/.vim/skel.java
+  "au BufNewFile *.page.xml 0r ~/.vim/skel.page.xml
+  "au BufNewFile pom.xml 0r ~/.vim/skel.pom.xml
 
-  " When editing a file, jump to the last cursor position (messes up svn commit)
+  " When editing a file, jump to the last cursor position
   au BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
   \   exe "normal! g'\"" |
   \ endif
 
-"  syn region faceletsRemove start=/<ui:remove>/ end=/<\/ui:remove>/
-"  command -nargs=+ HiLink hi def link <args>
-"  HiLink faceletsRemove htmlComment
-"  delcommand HiLink
-
 endif
-
-" what does this do again?
-"if &term=="xterm"
-"     set t_Co=8
-"     set t_Sb=[4%dm
-"     set t_Sf=[3%dm
-"endif
